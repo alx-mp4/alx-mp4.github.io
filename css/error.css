@@ -18,6 +18,7 @@
   z-index: 1;
   background: var(--color-primary);
   overflow: hidden;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .error-container::before {
@@ -77,6 +78,7 @@
   font-size: 2rem;
   margin-bottom: 1.5rem;
   font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .error-description {
@@ -103,6 +105,7 @@
   transition: all 0.3s ease;
   position: relative;
   z-index: 1;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .btn-home:hover {
@@ -135,5 +138,20 @@
   }
   60% {
     transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .error-code {
+    font-size: 6rem;
+  }
+
+  .error-message {
+    font-size: 1.8rem;
+  }
+
+  .error-description {
+    font-size: 1rem;
+    padding: 0 15px;
   }
 }
