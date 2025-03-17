@@ -108,7 +108,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Settings Sections */
 .settings-section {
   padding: 60px 0;
   background-color: var(--color-primary);
@@ -142,7 +141,6 @@
   border-radius: 3px;
 }
 
-/* Cards */
 .cs2-card {
   background-color: var(--color-secondary-lighter);
   border-radius: 15px;
@@ -228,7 +226,6 @@
   text-align: center;
 }
 
-/* Settings Tables */
 .settings-table,
 .specs-table {
   width: 100%;
@@ -328,43 +325,69 @@ html {
   scroll-padding-top: 140px;
 }
 
-.gear-img.position-relative {
-  position: relative;
+.game-preview-card {
+  background-color: #13121a;
+  border: 1px solid rgba(84, 100, 196, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-#crosshair-carousel {
+.game-preview-card .cs2-card-header {
+  background-color: #18161f;
+  border-bottom: 1px solid rgba(84, 100, 196, 0.15);
+}
+
+.game-preview-card .cs2-card-header h3 {
+  color: #5464c4;
+}
+
+.preview-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-color: #0d0c13;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.game-preview-carousel {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.crosshair-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  opacity: 0;
+.preview-img {
   position: absolute;
-  transition: opacity 0.3s ease;
+  max-width: 80%;
+  max-height: 80%;
+  width: auto;
+  height: auto;
+  opacity: 0;
+  object-fit: contain;
   display: none;
+  margin: auto;
+  transition: opacity 0.3s ease;
 }
 
-.crosshair-img.active {
+.preview-img.active {
   opacity: 1;
-  display: block;
+  display: block !important;
 }
 
-.crosshair-nav-btn {
+.preview-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: var(--color-secondary-darker);
-  color: var(--color-accent);
-  border: 1px solid var(--border-subtle);
-  width: 40px;
-  height: 40px;
+  background-color: rgba(24, 22, 31, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+  border: none;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -372,51 +395,43 @@ html {
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
-.crosshair-nav-btn:hover {
-  background-color: var(--color-accent);
+.preview-nav-btn:hover {
+  background-color: rgba(84, 100, 196, 0.8);
   color: white;
-  opacity: 1;
+  opacity: 0.9;
 }
 
-.crosshair-nav-prev {
-  left: 10px;
+.preview-nav-prev {
+  left: 15px;
 }
 
-.crosshair-nav-next {
-  right: 10px;
+.preview-nav-next {
+  right: 15px;
 }
 
-.carousel-indicators {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
+.preview-indicators {
+  padding: 10px 0;
+  background-color: #13121a;
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 8px 0;
+  gap: 8px;
 }
 
-.indicator {
-  width: 12px;
-  height: 12px;
+.preview-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background-color: var(--color-secondary-darker);
-  opacity: 0.8;
+  background-color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 2px solid var(--color-secondary-lighter);
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
-.indicator.active {
-  background-color: var(--color-accent);
-  opacity: 1;
+.preview-dot.active {
+  background-color: #5464c4;
   transform: scale(1.2);
-  border-color: var(--text-primary);
 }
 
 @media (max-width: 991.98px) {
@@ -487,10 +502,18 @@ html {
   .gear-img {
     height: 150px;
   }
-
-  .crosshair-nav-btn {
-    width: 32px;
-    height: 32px;
+  
+  .preview-container {
+    height: 250px;
+  }
+  
+  .preview-nav-btn {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .preview-img {
+    max-width: 90%;
   }
 
   html {

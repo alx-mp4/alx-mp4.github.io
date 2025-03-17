@@ -404,7 +404,78 @@
           <h2 class="section-heading gradient-text">
             <i class="fas fa-crosshairs me-2"></i>Crosshair
           </h2>
-          <div class="cs2-card">
+          
+          <div class="cs2-card game-preview-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-crosshairs me-2"></i>Crosshair Preview</h3>
+            </div>
+            <div class="preview-container">
+              <button
+                id="prev-crosshair"
+                class="preview-nav-btn preview-nav-prev"
+              >
+                <i class="fas fa-chevron-left"></i>
+              </button>
+      
+              <div id="crosshair-carousel" class="game-preview-carousel">
+                <img
+                  src="../assets/misc/cs2/crosshair-1.png"
+                  alt="Crosshair 1"
+                  class="preview-img active"
+                  data-index="0"
+                />
+                <img
+                  src="../assets/misc/cs2/crosshair-2.png"
+                  alt="Crosshair 2"
+                  class="preview-img"
+                  data-index="1"
+                />
+                <img
+                  src="../assets/misc/cs2/crosshair-3.png"
+                  alt="Crosshair 3"
+                  class="preview-img"
+                  data-index="2"
+                />
+                <img
+                  src="../assets/misc/cs2/crosshair-4.png"
+                  alt="Crosshair 4"
+                  class="preview-img"
+                  data-index="3"
+                />
+              </div>
+      
+              <button
+                id="next-crosshair"
+                class="preview-nav-btn preview-nav-next"
+              >
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="preview-indicators">
+              <span
+                class="preview-dot active"
+                data-index="0"
+                data-target="crosshair"
+              ></span>
+              <span
+                class="preview-dot"
+                data-index="1"
+                data-target="crosshair"
+              ></span>
+              <span
+                class="preview-dot"
+                data-index="2"
+                data-target="crosshair"
+              ></span>
+              <span
+                class="preview-dot"
+                data-index="3"
+                data-target="crosshair"
+              ></span>
+            </div>
+          </div>
+              
+          <div class="cs2-card mt-4">
             <div class="cs2-card-header">
               <h3><i class="fas fa-crosshairs me-2"></i>Crosshair Settings</h3>
             </div>
@@ -489,96 +560,29 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="gear-img mb-3 position-relative">
-                    <button
-                      id="prev-crosshair"
-                      class="crosshair-nav-btn crosshair-nav-prev"
-                    >
-                      <i class="fas fa-chevron-left"></i>
-                    </button>
-
-                    <button
-                      id="next-crosshair"
-                      class="crosshair-nav-btn crosshair-nav-next"
-                    >
-                      <i class="fas fa-chevron-right"></i>
-                    </button>
-
-                    <div id="crosshair-carousel">
-                      <img
-                        src="../assets/misc/cs2/crosshair-1.png"
-                        alt="Background 1"
-                        class="crosshair-img active"
-                        data-index="0"
-                      />
-                      <img
-                        src="../assets/misc/cs2/crosshair-2.png"
-                        alt="Background 2"
-                        class="crosshair-img"
-                        data-index="1"
-                      />
-                      <img
-                        src="../assets/misc/cs2/crosshair-3.png"
-                        alt="Background 3"
-                        class="crosshair-img"
-                        data-index="2"
-                      />
-                      <img
-                        src="../assets/misc/cs2/crosshair-4.png"
-                        alt="Background 4"
-                        class="crosshair-img"
-                        data-index="3"
-                      />
-                    </div>
-
-                    <div class="carousel-indicators">
-                      <span
-                        class="indicator active"
-                        data-index="0"
-                        data-target="crosshair"
-                      ></span>
-                      <span
-                        class="indicator"
-                        data-index="1"
-                        data-target="crosshair"
-                      ></span>
-                      <span
-                        class="indicator"
-                        data-index="2"
-                        data-target="crosshair"
-                      ></span>
-                      <span
-                        class="indicator"
-                        data-index="3"
-                        data-target="crosshair"
-                      ></span>
-                    </div>
-                  </div>
-
-                  <div class="code-block-container">
+                  <div class="code-block-container mb-4">
                     <div class="code-block">CSGO-wVB4s-pBDF9-fsSFF-zBTqq-2XJaA</div>
                     <button class="copy-btn" onclick="copyCode(this)">
                       <i class="fas fa-copy"></i>
                     </button>
                   </div>
 
-                  <div class="code-block-container mt-3">
+                  <div class="code-block-container">
                     <div class="code-block">cl_crosshairstyle 4; 
-                      cl_crosshairsize 2; 
-                      cl_crosshairthickness 0.5; 
-                      cl_crosshairgap -5;
-                      cl_crosshair_drawoutline 1; 
-                      cl_crosshair_outlinethickness 0.5; 
-                      cl_crosshairdot 0; 
-                      cl_crosshair_t 0;
-                      cl_crosshairusealpha 1; 
-                      cl_crosshairalpha 255; 
-                      cl_crosshair_recoil 0; 
-                      cl_crosshairgap_useweaponvalue 0;
-                      cl_crosshaircolor 5; 
-                      cl_crosshair_sniper_width 1; 
-                      cl_crosshair_friendly_warning 0
-                    </div>
+                    cl_crosshairsize 2; 
+                    cl_crosshairthickness 0.5; 
+                    cl_crosshairgap -5;
+                    cl_crosshair_drawoutline 1; 
+                    cl_crosshair_outlinethickness 0.5; 
+                    cl_crosshairdot 0; 
+                    cl_crosshair_t 0;
+                    cl_crosshairusealpha 1; 
+                    cl_crosshairalpha 255; 
+                    cl_crosshair_recoil 0; 
+                    cl_crosshairgap_useweaponvalue 0;
+                    cl_crosshaircolor 5; 
+                    cl_crosshair_sniper_width 1; 
+                    cl_crosshair_friendly_warning 0</div>
                     <button class="copy-btn" onclick="copyCode(this)">
                       <i class="fas fa-copy"></i>
                     </button>
@@ -596,7 +600,77 @@
           <h2 class="section-heading gradient-text">
             <i class="fas fa-eye me-2"></i>Viewmodel
           </h2>
-          <div class="cs2-card">
+          <div class="cs2-card game-preview-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-eye me-2"></i>Viewmodel Preview</h3>
+            </div>
+            <div class="preview-container">
+              <button
+                id="prev-viewmodel"
+                class="preview-nav-btn preview-nav-prev"
+              >
+                <i class="fas fa-chevron-left"></i>
+              </button>
+      
+              <div id="viewmodel-carousel" class="game-preview-carousel">
+                <img
+                  src="../assets/misc/cs2/viewmodel-1.jpg"
+                  alt="Viewmodel 1"
+                  class="preview-img active"
+                  data-index="0"
+                />
+                <img
+                  src="../assets/misc/cs2/viewmodel-2.jpg"
+                  alt="Viewmodel 2"
+                  class="preview-img"
+                  data-index="1"
+                />
+                <img
+                  src="../assets/misc/cs2/viewmodel-3.jpg"
+                  alt="Viewmodel 3"
+                  class="preview-img"
+                  data-index="2"
+                />
+                <img
+                  src="../assets/misc/cs2/viewmodel-4.jpg"
+                  alt="Viewmodel 4"
+                  class="preview-img"
+                  data-index="3"
+                />
+              </div>
+      
+              <button
+                id="next-viewmodel"
+                class="preview-nav-btn preview-nav-next"
+              >
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="preview-indicators">
+              <span
+                class="preview-dot active"
+                data-index="0"
+                data-target="viewmodel"
+              ></span>
+              <span
+                class="preview-dot"
+                data-index="1"
+                data-target="viewmodel"
+              ></span>
+              <span
+                class="preview-dot"
+                data-index="2"
+                data-target="viewmodel"
+              ></span>
+              <span
+                class="preview-dot"
+                data-index="3"
+                data-target="viewmodel"
+              ></span>
+            </div>
+          </div>
+              
+          <div class="cs2-card mt-4">
             <div class="cs2-card-header">
               <h3><i class="fas fa-eye me-2"></i>Viewmodel Settings</h3>
             </div>
@@ -633,11 +707,10 @@
               </div>
               <div class="code-block-container mt-3">
                 <div class="code-block">viewmodel_fov 68; 
-                  viewmodel_offset_x 2.5; 
-                  viewmodel_offset_y 2; 
-                  viewmodel_offset_z -2; 
-                  viewmodel_presetpos 0
-                </div>
+                viewmodel_offset_x 2.5; 
+                viewmodel_offset_y 2; 
+                viewmodel_offset_z -2; 
+                viewmodel_presetpos 0</div>
                 <button class="copy-btn" onclick="copyCode(this)">
                   <i class="fas fa-copy"></i>
                 </button>
@@ -714,18 +787,17 @@
 
                   <div class="code-block-container mt-3">
                     <div class="code-block">cl_radar_always_centered 0; 
-                      cl_radar_icon_scale_min 0.4;
-                      cl_radar_rotate 1; 
-                      cl_radar_scale 0.3;
-                      cl_radar_scale_alternate 1; 
-                      cl_radar_scale_dynamic 0;
-                      cl_radar_square_with_scoreboard 1;
-                      cl_hud_radar_background_alpha 0.66; 
-                      cl_hud_radar_scale 1;
-                      cl_drawhud_force_radar 0; 
-                      cl_hud_radar_map_additive 1;
-                      cl_teammate_colors_show 2
-                    </div>
+                    cl_radar_icon_scale_min 0.4;
+                    cl_radar_rotate 1; 
+                    cl_radar_scale 0.3;
+                    cl_radar_scale_alternate 1; 
+                    cl_radar_scale_dynamic 0;
+                    cl_radar_square_with_scoreboard 1;
+                    cl_hud_radar_background_alpha 0.66; 
+                    cl_hud_radar_scale 1;
+                    cl_drawhud_force_radar 0; 
+                    cl_hud_radar_map_additive 1;
+                    cl_teammate_colors_show 2</div>
                     <button class="copy-btn" onclick="copyCode(this)">
                       <i class="fas fa-copy"></i>
                     </button>
@@ -750,10 +822,9 @@
             <div class="cs2-card-body">
               <div class="code-block-container mt-3">
                 <div class="code-block">bind "c" "switchhands"; 
-                  bind "MOUSE5" "+voicerecord"; 
-                  bind "MWHEELUP" "+jump"; 
-                  bind "MWHEELDOWN" "+jump"
-                </div>
+                bind "MOUSE5" "+voicerecord"; 
+                bind "MWHEELUP" "+jump"; 
+                bind "MWHEELDOWN" "+jump"</div>
                 <button class="copy-btn" onclick="copyCode(this)">
                   <i class="fas fa-copy"></i>
                 </button>
