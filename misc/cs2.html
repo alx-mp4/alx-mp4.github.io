@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beezle - CS2 Settings</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cs2.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-md fixed-top glass-nav">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="../">
+            &lt;Aleksandar Haralanov /&gt;
+          </a>
+          <button
+            class="navbar-toggler custom-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="../">
+                  <i class="fas fa-home me-1"></i> Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../#about">
+                  <i class="fas fa-user me-1"></i> About
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../#contact">
+                  <i class="fas fa-envelope me-1"></i> Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- CS2 Settings Header -->
+      <section class="cs2-header-section">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-12 text-center">
+              <div class="cs2-header-content">
+                <h1 class="gradient-text cs2-title">
+                  Counter-Strike 2 Settings
+                </h1>
+                <div class="cs2-logo-text">
+                  <i class="fas fa-gamepad me-2"></i> CS2 Gaming Config
+                </div>
+                <div class="last-updated">Last updated: March 17, 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Navigation -->
+      <section class="quick-nav-section">
+        <div class="container">
+          <div class="quick-nav-container">
+            <a href="#gear" class="quick-nav-item">
+              <i class="fas fa-desktop me-2"></i>Setup
+            </a>
+            <a href="#mouse" class="quick-nav-item">
+              <i class="fas fa-mouse me-2"></i>Mouse
+            </a>
+            <a href="#video" class="quick-nav-item">
+              <i class="fas fa-display me-2"></i>Video
+            </a>
+            <a href="#crosshair" class="quick-nav-item">
+              <i class="fas fa-crosshairs me-2"></i>Crosshair
+            </a>
+            <a href="#viewmodel" class="quick-nav-item">
+              <i class="fas fa-eye me-2"></i>Viewmodel
+            </a>
+            <a href="#radar" class="quick-nav-item">
+              <i class="fas fa-globe me-2"></i>Radar
+            </a>
+            <a href="#keybinds" class="quick-nav-item">
+              <i class="fas fa-keyboard me-2"></i>Keybinds
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Setup Section -->
+      <section class="settings-section" id="gear">
+        <div class="container">
+          <h2 class="section-heading gradient-text">
+            <i class="fas fa-desktop me-2"></i>Setup
+          </h2>
+          <div class="row g-4">
+            <div class="col-lg col-md-6">
+              <div class="cs2-card">
+                <div class="cs2-card-header">
+                  <h3><i class="fas fa-mouse me-2"></i>Mouse</h3>
+                </div>
+                <div class="cs2-card-body with-img">
+                  <div class="gear-img">
+                    <img
+                      src="../assets/misc/cs2/mouse.png"
+                      alt="Razer Viper V2 Pro"
+                    />
+                  </div>
+                  <div class="gear-info">
+                    <div class="gear-name">Razer Viper V2 Pro</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg col-md-6">
+              <div class="cs2-card">
+                <div class="cs2-card-header">
+                  <h3><i class="fas fa-keyboard me-2"></i>Keyboard</h3>
+                </div>
+                <div class="cs2-card-body with-img">
+                  <div class="gear-img">
+                    <img
+                      src="../assets/misc/cs2/keyboard.png"
+                      alt="KBDFans Tofu65"
+                    />
+                  </div>
+                  <div class="gear-info">
+                    <div class="gear-name">Custom Modded KBDFans Tofu65</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg col-md-6">
+              <div class="cs2-card">
+                <div class="cs2-card-header">
+                  <h3><i class="fas fa-headphones me-2"></i>Headphones</h3>
+                </div>
+                <div class="cs2-card-body with-img">
+                  <div class="gear-img">
+                    <img
+                      src="../assets/misc/cs2/headphones.png"
+                      alt="beyerdynamic DT 990 Pro"
+                    />
+                  </div>
+                  <div class="gear-info">
+                    <div class="gear-name">
+                      beyerdynamic DT 990 Pro (250 Ohm)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg col-md-6">
+              <div class="cs2-card">
+                <div class="cs2-card-header">
+                  <h3><i class="fas fa-microphone me-2"></i>Microphone</h3>
+                </div>
+                <div class="cs2-card-body with-img">
+                  <div class="gear-img">
+                    <img
+                      src="../assets/misc/cs2/microphone.png"
+                      alt="HyperX QuadCast"
+                    />
+                  </div>
+                  <div class="gear-info">
+                    <div class="gear-name">HyperX QuadCast</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg col-md-6">
+              <div class="cs2-card">
+                <div class="cs2-card-header">
+                  <h3><i class="fas fa-microchip me-2"></i>PC Specs</h3>
+                </div>
+                <div class="cs2-card-body">
+                  <div class="specs-table">
+                    <div class="spec-row">
+                      <div class="spec-name">CPU</div>
+                      <div class="spec-value">Ryzen 5 3600</div>
+                    </div>
+                    <div class="spec-row">
+                      <div class="spec-name">GPU</div>
+                      <div class="spec-value">RTX 3070 Ti</div>
+                    </div>
+                    <div class="spec-row">
+                      <div class="spec-name">RAM</div>
+                      <div class="spec-value">16 GB 3200 MHz</div>
+                    </div>
+                    <div class="spec-row">
+                      <div class="spec-name">MB</div>
+                      <div class="spec-value">B550M AORUS</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs2-card mt-4">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-rocket me-2"></i>Launch Options</h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="code-block-container">
+                <div class="code-block">-vulkan -high -novid allow_third_party_software</div>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mouse Settings Section -->
+      <section class="settings-section" id="mouse">
+        <div class="container">
+          <h2 class="section-heading gradient-text">
+            <i class="fas fa-mouse me-2"></i>Mouse
+          </h2>
+          <div class="cs2-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-mouse me-2"></i>Mouse Settings</h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">DPI</div>
+                      <div class="setting-value">400</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Game Sensitivity</div>
+                      <div class="setting-value">2.5</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Windows Sensitivity</div>
+                      <div class="setting-value">6/11</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">eDPI</div>
+                      <div class="setting-value">1000</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Polling Rate</div>
+                      <div class="setting-value">1000 Hz</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Raw Input</div>
+                      <div class="setting-value">On</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video Settings Section -->
+      <section class="settings-section" id="video">
+        <div class="container">
+          <h2 class="section-heading gradient-text">
+            <i class="fas fa-display me-2"></i>Video
+          </h2>
+          <div class="cs2-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-display me-2"></i>Display Settings</h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">Resolution</div>
+                      <div class="setting-value">1920×1080</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Aspect Ratio</div>
+                      <div class="setting-value">16:9</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Brightness</div>
+                      <div class="setting-value">120%</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">Display Mode</div>
+                      <div class="setting-value">Fullscreen</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Refresh Rate</div>
+                      <div class="setting-value">165 Hz</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Vsync</div>
+                      <div class="setting-value">Disabled</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs2-card mt-4">
+            <div class="cs2-card-header">
+              <h3>
+                <i class="fas fa-sliders me-2"></i>Advanced Video Settings
+              </h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">Boost Player Contrast</div>
+                      <div class="setting-value">Enabled</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Multisampling Anti-Aliasing
+                      </div>
+                      <div class="setting-value">4x MSAA</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Global Shadow Quality</div>
+                      <div class="setting-value">Very High</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Model / Texture Detail</div>
+                      <div class="setting-value">Very High</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">Shader Detail</div>
+                      <div class="setting-value">Low</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Particle Detail</div>
+                      <div class="setting-value">Low</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Ambient Occlusion</div>
+                      <div class="setting-value">High</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">NVIDIA Reflex</div>
+                      <div class="setting-value">Enabled + Boost</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Crosshair Section -->
+      <section class="settings-section" id="crosshair">
+        <div class="container">
+          <h2 class="section-heading gradient-text">
+            <i class="fas fa-crosshairs me-2"></i>Crosshair
+          </h2>
+          <div class="cs2-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-crosshairs me-2"></i>Crosshair Settings</h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">Crosshair Style</div>
+                      <div class="setting-value">CLASSIC STATIC</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Friendly Fire Reticle Warning
+                      </div>
+                      <div class="setting-value">ALWAYS OFF</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Follow Recoil</div>
+                      <div class="setting-value">NO</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Center Dot</div>
+                      <div class="setting-value">NO</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Length</div>
+                      <div class="setting-value">2.0</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Thickness</div>
+                      <div class="setting-value">0.5</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Gap</div>
+                      <div class="setting-value">-5.0</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Outline</div>
+                      <div class="setting-value">✔️ 0.5</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Red</div>
+                      <div class="setting-value">255</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Green</div>
+                      <div class="setting-value">0</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Blue</div>
+                      <div class="setting-value">0</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Alpha</div>
+                      <div class="setting-value">✔️ 255</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">T Style</div>
+                      <div class="setting-value">NO</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Deployed Weapon Gap</div>
+                      <div class="setting-value">NO</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Use crosshair color for scope dot
+                      </div>
+                      <div class="setting-value">NO</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Show Player Crosshairs</div>
+                      <div class="setting-value">EVERYONE</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Show my crosshair when spectating bots
+                      </div>
+                      <div class="setting-value">ALWAYS</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- Crosshair image carousel with updated indicators -->
+                  <div class="gear-img mb-3 position-relative">
+                    <button
+                      id="prev-crosshair"
+                      class="crosshair-nav-btn crosshair-nav-prev"
+                    >
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+
+                    <button
+                      id="next-crosshair"
+                      class="crosshair-nav-btn crosshair-nav-next"
+                    >
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <div id="crosshair-carousel">
+                      <img
+                        src="../assets/misc/cs2/crosshair-1.png"
+                        alt="Background 1"
+                        class="crosshair-img active"
+                        data-index="0"
+                      />
+                      <img
+                        src="../assets/misc/cs2/crosshair-2.png"
+                        alt="Background 2"
+                        class="crosshair-img"
+                        data-index="1"
+                      />
+                      <img
+                        src="../assets/misc/cs2/crosshair-3.png"
+                        alt="Background 3"
+                        class="crosshair-img"
+                        data-index="2"
+                      />
+                      <img
+                        src="../assets/misc/cs2/crosshair-4.png"
+                        alt="Background 4"
+                        class="crosshair-img"
+                        data-index="3"
+                      />
+                    </div>
+
+                    <!-- Updated indicator dots -->
+                    <div class="carousel-indicators">
+                      <span
+                        class="indicator active"
+                        data-index="0"
+                        data-target="crosshair"
+                      ></span>
+                      <span
+                        class="indicator"
+                        data-index="1"
+                        data-target="crosshair"
+                      ></span>
+                      <span
+                        class="indicator"
+                        data-index="2"
+                        data-target="crosshair"
+                      ></span>
+                      <span
+                        class="indicator"
+                        data-index="3"
+                        data-target="crosshair"
+                      ></span>
+                    </div>
+                  </div>
+
+                  <div class="code-block-container">
+                    <div class="code-block">CSGO-wVB4s-pBDF9-fsSFF-zBTqq-2XJaA</div>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+
+                  <div class="code-block-container mt-3">
+                    <div class="code-block">cl_crosshairstyle 4; 
+                      cl_crosshairsize 2; 
+                      cl_crosshairthickness 0.5; 
+                      cl_crosshairgap -5;
+                      cl_crosshair_drawoutline 1; 
+                      cl_crosshair_outlinethickness 0.5; 
+                      cl_crosshairdot 0; 
+                      cl_crosshair_t 0;
+                      cl_crosshairusealpha 1; 
+                      cl_crosshairalpha 255; 
+                      cl_crosshair_recoil 0; 
+                      cl_crosshairgap_useweaponvalue 0;
+                      cl_crosshaircolor 5; 
+                      cl_crosshair_sniper_width 1; 
+                      cl_crosshair_friendly_warning 0
+                    </div>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Viewmodel Section -->
+      <section class="settings-section" id="viewmodel">
+        <div class="container">
+          <h2 class="section-heading gradient-text">
+            <i class="fas fa-eye me-2"></i>Viewmodel
+          </h2>
+          <div class="cs2-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-eye me-2"></i>Viewmodel Settings</h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">FOV</div>
+                      <div class="setting-value">68</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Offset X</div>
+                      <div class="setting-value">2.5</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Offset Y</div>
+                      <div class="setting-value">2</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">Offset Z</div>
+                      <div class="setting-value">-2</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Preset Position</div>
+                      <div class="setting-value">0</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="code-block-container mt-3">
+                <div class="code-block">viewmodel_fov 68; 
+                  viewmodel_offset_x 2.5; 
+                  viewmodel_offset_y 2; 
+                  viewmodel_offset_z -2; 
+                  viewmodel_presetpos 0
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Radar Section -->
+      <section class="settings-section" id="radar">
+        <div class="container">
+          <h2 class="section-heading gradient-text">
+            <i class="fas fa-globe me-2"></i>Radar
+          </h2>
+          <div class="cs2-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-globe me-2"></i>Radar Settings</h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="settings-table">
+                    <div class="setting-row">
+                      <div class="setting-name">Radar Centers The Player</div>
+                      <div class="setting-value">NO</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Radar Is Rotating</div>
+                      <div class="setting-value">YES</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Radar Hud Map Blends With Background
+                      </div>
+                      <div class="setting-value">YES</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Radar Hud Background Opacity
+                      </div>
+                      <div class="setting-value">0.66</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Radar Hud Size</div>
+                      <div class="setting-value">1.00</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Radar Map Zoom</div>
+                      <div class="setting-value">0.30</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Radar Map Alternate Zoom</div>
+                      <div class="setting-value">1.00</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Toggle Shape With Scoreboard
+                      </div>
+                      <div class="setting-value">YES</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">
+                        Radar Is Zooming Dynamically
+                      </div>
+                      <div class="setting-value">NO</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear-img mb-3">
+                    <img src="../assets/misc/cs2/radar.png" alt="Radar" />
+                  </div>
+
+                  <div class="code-block-container mt-3">
+                    <div class="code-block">cl_radar_always_centered 0; 
+                      cl_radar_icon_scale_min 0.4;
+                      cl_radar_rotate 1; 
+                      cl_radar_scale 0.3;
+                      cl_radar_scale_alternate 1; 
+                      cl_radar_scale_dynamic 0;
+                      cl_radar_square_with_scoreboard 1;
+                      cl_hud_radar_background_alpha 0.66; 
+                      cl_hud_radar_scale 1;
+                      cl_drawhud_force_radar 0; 
+                      cl_hud_radar_map_additive 1;
+                      cl_teammate_colors_show 2
+                    </div>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Keybinds Section -->
+      <section class="settings-section" id="keybinds">
+        <div class="container">
+          <h2 class="section-heading gradient-text">
+            <i class="fas fa-keyboard me-2"></i>Keybinds
+          </h2>
+          <div class="cs2-card">
+            <div class="cs2-card-header">
+              <h3><i class="fas fa-keyboard me-2"></i>Key Bindings</h3>
+            </div>
+            <div class="cs2-card-body">
+              <div class="code-block-container mt-3">
+                <div class="code-block">bind "c" "switchhands"; 
+                  bind "MOUSE5" "+voicerecord"; 
+                  bind "MWHEELUP" "+jump"; 
+                  bind "MWHEELDOWN" "+jump"
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-gradient text-center py-5">
+      <div class="container">
+        <div class="footer-content">
+          <div class="row align-items-center">
+            <div class="col-md-4 text-md-start mb-3 mb-md-0">
+              <h4 class="footer-logo">&lt;Aleksandar Haralanov /&gt;</h4>
+              <p class="footer-tagline">Back-End Developer</p>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+              <div class="social-links">
+                <a
+                  href="https://github.com/AleksandarHaralanov"
+                  class="social-icon"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-icon" target="_blank">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a
+                  href="mailto:aleksandar.haralanov01@gmail.com"
+                  class="social-icon"
+                >
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <a href="#" class="footer-link">Privacy Policy</a>
+              <a href="#" class="footer-link">Terms of Service</a>
+            </div>
+          </div>
+          <div class="footer-divider"></div>
+          <p class="copyright">
+            Copyright &copy; 2024 Aleksandar Haralanov. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/cs2.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
