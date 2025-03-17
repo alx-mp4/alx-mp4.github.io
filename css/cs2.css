@@ -1,4 +1,3 @@
-/* CS2 Settings Page Styles */
 :root {
   --color-primary: #13121a;
   --color-primary-lighter: #18161f;
@@ -14,7 +13,6 @@
   --border-subtle: rgba(84, 100, 196, 0.15);
 }
 
-/* Header Section */
 .cs2-header-section {
   padding: 120px 0 30px;
   background: linear-gradient(
@@ -71,7 +69,6 @@
   font-size: 0.85rem;
 }
 
-/* Quick Navigation */
 .quick-nav-section {
   background-color: var(--color-secondary);
   padding: 10px 0;
@@ -188,7 +185,6 @@
   flex-direction: column;
 }
 
-/* Modified gear-img styles for proper image display */
 .gear-img {
   height: 200px;
   background: linear-gradient(
@@ -204,12 +200,10 @@
   padding: 15px;
 }
 
-/* Remove the icon when an image is present */
 .gear-img::after {
   content: none;
 }
 
-/* Style the image properly */
 .gear-img img {
   max-width: 100%;
   max-height: 100%;
@@ -219,7 +213,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Add hover effect */
 .gear-img:hover img {
   transform: scale(1.05);
 }
@@ -271,13 +264,11 @@
   font-size: 0.95rem;
 }
 
-/* Code Wrapper and Code Block Styles */
 .code-wrapper {
   position: relative;
   margin-bottom: 15px;
 }
 
-/* Code Blocks - Fix indentation and make room for the button */
 .code-block {
   background-color: var(--color-secondary-darker);
   border-radius: 8px;
@@ -285,7 +276,7 @@
   font-family: "JetBrains Mono", monospace;
   font-size: 0.9rem;
   color: var(--text-primary);
-  white-space: pre-line !important; /* This preserves only line breaks, not spaces */
+  white-space: pre-line !important;
   word-break: break-word;
   line-height: 1.5;
   border: 1px solid var(--border-subtle);
@@ -294,7 +285,6 @@
   margin: 15px 0 0 !important;
 }
 
-/* Icon-only Copy Button */
 .copy-btn {
   background-color: var(--color-secondary-darker);
   border: 1px solid var(--border-subtle);
@@ -302,7 +292,7 @@
   width: 32px !important;
   height: 32px !important;
   padding: 0 !important;
-  border-radius: 50% !important; /* Make it circular */
+  border-radius: 50% !important;
   font-size: 0.85rem !important;
   cursor: pointer;
   display: flex !important;
@@ -315,7 +305,7 @@
   transform: translateY(-50%);
   margin: 0 !important;
   z-index: 5;
-  opacity: 0.7; /* Start slightly transparent */
+  opacity: 0.7;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -326,7 +316,6 @@
   transform: translateY(-50%) scale(1.1) !important;
 }
 
-/* Make sure the container is positioned properly */
 .code-wrapper,
 .code-block-container,
 .console-code-container {
@@ -334,13 +323,11 @@
   margin-bottom: 15px;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 140px; /* Adjust based on navbar + quick nav height */
+  scroll-padding-top: 140px;
 }
 
-/* Carousel Styling for Crosshair and Radar */
 .gear-img.position-relative {
   position: relative;
 }
@@ -402,7 +389,6 @@ html {
   right: 10px;
 }
 
-/* Enhanced indicator styles for better visibility */
 .carousel-indicators {
   position: absolute;
   bottom: 10px;
@@ -410,30 +396,29 @@ html {
   right: 0;
   display: flex;
   justify-content: center;
-  gap: 10px; /* Increased spacing between dots */
-  padding: 8px 0; /* Add padding for larger click area */
+  gap: 10px;
+  padding: 8px 0;
 }
 
 .indicator {
-  width: 12px; /* Increased from 8px */
-  height: 12px; /* Increased from 8px */
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background-color: var(--color-secondary-darker);
-  opacity: 0.8; /* Increased from 0.5 */
+  opacity: 0.8;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 2px solid var(--color-secondary-lighter); /* Added border */
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
+  border: 2px solid var(--color-secondary-lighter);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .indicator.active {
   background-color: var(--color-accent);
   opacity: 1;
   transform: scale(1.2);
-  border-color: var(--text-primary); /* Brighter border for active state */
+  border-color: var(--text-primary);
 }
 
-/* Responsive Styles */
 @media (max-width: 991.98px) {
   .cs2-title {
     font-size: 2rem;
