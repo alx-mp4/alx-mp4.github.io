@@ -733,10 +733,6 @@
                 <div class="col-md-6">
                   <div class="settings-table">
                     <div class="setting-row">
-                      <div class="setting-name">FOV</div>
-                      <div class="setting-value">68</div>
-                    </div>
-                    <div class="setting-row">
                       <div class="setting-name">Offset X</div>
                       <div class="setting-value">2.5</div>
                     </div>
@@ -744,17 +740,25 @@
                       <div class="setting-name">Offset Y</div>
                       <div class="setting-value">2</div>
                     </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Offset Z</div>
+                      <div class="setting-value">-2</div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="settings-table">
                     <div class="setting-row">
-                      <div class="setting-name">Offset Z</div>
-                      <div class="setting-value">-2</div>
+                      <div class="setting-name">FOV</div>
+                      <div class="setting-value">68</div>
                     </div>
                     <div class="setting-row">
                       <div class="setting-name">Preset Position</div>
                       <div class="setting-value">0</div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-name">Prefer Left Handed</div>
+                      <div class="setting-value">1</div>
                     </div>
                   </div>
                 </div>
@@ -764,7 +768,8 @@
                 viewmodel_offset_x 2.5; 
                 viewmodel_offset_y 2; 
                 viewmodel_offset_z -2; 
-                viewmodel_presetpos 0</div>
+                viewmodel_presetpos 0; 
+                cl_prefer_lefthanded 1</div>
                 <button class="copy-btn" onclick="copyCode(this)">
                   <i class="fas fa-copy"></i>
                 </button>
