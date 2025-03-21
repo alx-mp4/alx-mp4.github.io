@@ -880,10 +880,14 @@
             </div>
             <div class="cs2-card-body">
               <div class="code-block-container mt-3">
-                <div class="code-block">bind "c" "switchhands"; 
-                bind "MOUSE5" "+voicerecord"; 
-                bind "MWHEELUP" "+jump"; 
-                bind "MWHEELDOWN" "+jump"</div>
+                <div class="code-block">unbind "MWHEELUP"; 
+                  unbind "MWHEELDOWN"; 
+                  unbind "MOUSE4"; 
+                  
+                  bind "MWHEELUP" "+jump"; 
+                  bind "MWHEELDOWN" "+jump"; 
+                  bind "MOUSE4" "switchhands"; 
+                  bind "MOUSE5" "+voicerecord"</div>
                 <button class="copy-btn" onclick="copyCode(this)">
                   <i class="fas fa-copy"></i>
                 </button>
