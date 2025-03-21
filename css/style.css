@@ -392,6 +392,36 @@ pre {
   word-break: break-word;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-secondary-darker);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-darker);
+  border-radius: 8px;
+  border: 2px solid var(--color-secondary-darker);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-secondary-darker);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-darker) var(--color-secondary-darker);
+}
+
 @media (max-width: 767.98px) {
   .hero-section {
     padding-top: 100px;
