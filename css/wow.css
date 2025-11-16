@@ -1,0 +1,145 @@
+/* Minimal dark background */
+body {
+  background-color: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* Header */
+.wow-header-section {
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.wow-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.wow-subtitle {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Tabs */
+.wow-tabs-section {
+  padding-top: 0.5rem;
+}
+
+.wow-tab-nav .nav-link {
+  border-radius: 999px;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  color: #e5e7eb;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.wow-tab-nav .nav-link:hover {
+  background-color: #020617;
+  border-color: #1f2937;
+}
+
+.wow-tab-nav .nav-link.active {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+/* Tab content spacing */
+.wow-tab-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Cards */
+.wow-card {
+  background-color: #020617;
+  border-radius: 0.75rem;
+  border: 1px solid #111827;
+}
+
+.wow-card-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #111827;
+}
+
+.wow-card-body {
+  padding: 0.75rem 1rem 1rem;
+}
+
+/* Version note next to the name */
+.wow-version-note {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Pills (labels) */
+.wow-pill-wa {
+  background-color: #14532d;
+  color: #bbf7d0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wow-pill-addon {
+  background-color: #1d4ed8;
+  color: #dbeafe;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wow-pill-macro {
+  background-color: #92400e;
+  color: #fed7aa;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Textareas used for import strings (read-only) */
+.wow-import-text {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.8rem;
+  background-color: #020617;
+  color: #e5e7eb;
+  border-color: #1f2937;
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* keep focus style so it's clear it's selected for copy */
+.wow-import-text:focus {
+  background-color: #020617;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.3);
+}
+
+/* Copy button */
+.wow-copy-btn {
+  font-size: 0.8rem;
+  padding-inline: 0.6rem;
+}
+
+.wow-copy-btn.copied {
+  border-color: #22c55e;
+  background-color: #14532d;
+  color: #bbf7d0;
+}
+
+/* Small devices tweaks */
+@media (min-width: 768px) {
+  .wow-header-section {
+    padding-top: 0.75rem;
+  }
+
+  .wow-title {
+    font-size: 1.9rem;
+  }
+}
