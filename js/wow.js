@@ -43,6 +43,7 @@
       window.getSelection().removeAllRanges();
     }
   }
+<<<<<<< HEAD
 
   /* When a tab becomes active, scroll it into view so users don’t think it’s empty */
   const tabButtons = document.querySelectorAll('#wowTab button[data-bs-toggle="tab"]');
@@ -55,4 +56,6 @@
       }
     });
   });
+=======
+>>>>>>> ba463e26344873ad72fd36f37588b64773970c0f
 })();
