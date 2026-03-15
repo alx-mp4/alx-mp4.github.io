@@ -1,0 +1,228 @@
+@font-face {
+  font-family: "Friz Quadrata";
+  src: url("../assets/friz-quadrata-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-deep: #050607;
+  --panel: rgba(20, 15, 10, 0.94);
+  --panel-soft: rgba(31, 23, 15, 0.95);
+  --gold: #d6b46a;
+  --gold-dim: #96753d;
+  --bronze: #5c431f;
+  --bronze-dark: #2e2110;
+  --text-main: #efe3bf;
+  --text-soft: #c8b48a;
+  --shadow: 0 16px 38px rgba(0, 0, 0, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+label {
+  font-family: "Friz Quadrata", Verdana, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text-main);
+  background:
+    linear-gradient(rgba(6, 8, 9, 0.42), rgba(6, 8, 9, 0.6)),
+    url("../assets/background.jpg") center top / cover fixed no-repeat,
+    var(--bg-deep);
+  position: relative;
+}
+
+.wow-frame {
+  position: relative;
+  background: linear-gradient(180deg, rgba(40, 29, 18, 0.95), rgba(18, 14, 10, 0.96));
+  border: 1px solid var(--bronze-dark);
+  box-shadow: var(--shadow);
+}
+
+.wow-frame::before,
+.wow-frame::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.wow-frame::before {
+  inset: 6px;
+  border: 1px solid rgba(214, 180, 106, 0.42);
+}
+
+.wow-frame::after {
+  inset: 12px;
+  border: 1px solid rgba(117, 88, 42, 0.42);
+}
+
+.frame-inner {
+  position: relative;
+  z-index: 1;
+  padding: 1.35rem;
+}
+
+.empty-title,
+.card-title {
+  font-family: "Friz Quadrata", Georgia, "Times New Roman", serif;
+}
+
+.empty-text {
+  color: var(--text-soft);
+}
+
+.wow-label {
+  color: var(--gold);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.wow-input {
+  min-height: 48px;
+  border-radius: 0;
+  border: 1px solid var(--gold-dim);
+  background: linear-gradient(180deg, rgba(15, 12, 9, 0.98), rgba(29, 22, 15, 0.98));
+  color: var(--text-main);
+}
+
+.wow-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.2rem rgba(214, 180, 106, 0.15);
+  background: linear-gradient(180deg, rgba(15, 12, 9, 0.98), rgba(29, 22, 15, 0.98));
+  color: var(--text-main);
+}
+
+.wow-input::placeholder {
+  color: #9b8867;
+}
+
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.category-tab {
+  min-height: 42px;
+  padding: 0.62rem 0.95rem;
+  border: 1px solid var(--bronze-dark);
+  background: linear-gradient(180deg, #4a351d, #271b10);
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 0.92rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.15s ease, filter 0.15s ease, border-color 0.15s ease;
+}
+
+.category-tab:hover,
+.category-tab:focus-visible,
+.copy-btn:hover,
+.copy-btn:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.category-tab.active {
+  background: linear-gradient(180deg, #d5bd7d, #a9823f);
+  color: #1b1308;
+  border-color: #d6b46a;
+}
+
+
+.empty-state {
+  padding: 2rem 1rem;
+  text-align: center;
+  border: 1px dashed rgba(214, 180, 106, 0.35);
+  background: rgba(10, 8, 6, 0.35);
+}
+
+.empty-title {
+  color: #f0deb3;
+  font-size: 1.65rem;
+}
+
+.import-card {
+  height: 100%;
+  background: linear-gradient(180deg, rgba(31, 24, 16, 0.98), rgba(18, 14, 10, 0.99));
+  border: 1px solid rgba(99, 74, 36, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(214, 180, 106, 0.16), 0 12px 30px rgba(0, 0, 0, 0.28);
+}
+
+.import-card-inner {
+  padding: 0.8rem;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  color: #f2e5c2;
+  margin-bottom: 0.55rem;
+}
+
+.import-box {
+  width: 100%;
+  min-height: 150px;
+  resize: vertical;
+  max-height: 260px;
+  border: 1px solid rgba(150, 117, 61, 0.72);
+  background: linear-gradient(180deg, rgba(11, 11, 9, 0.97), rgba(21, 18, 13, 0.98));
+  color: #e8dcc0;
+  padding: 0.75rem;
+  font: 0.82rem/1.35 Consolas, Monaco, "Courier New", monospace;
+  white-space: pre-wrap;
+}
+
+.import-box:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.18rem rgba(214, 180, 106, 0.12);
+}
+
+.card-actions {
+  margin-top: 0.65rem;
+}
+
+.copy-btn {
+  min-height: 42px;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--bronze-dark);
+  background: linear-gradient(180deg, #d5bd7d, #aa8542);
+  color: #161007;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 6px 16px rgba(0,0,0,0.22);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.toast {
+  border-radius: 0;
+  background: linear-gradient(180deg, rgba(33, 26, 18, 0.98), rgba(17, 13, 9, 0.98)) !important;
+}
+
+@media (max-width: 991.98px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .frame-inner {
+    padding: 1.15rem;
+  }
+
+  .category-tabs {
+    gap: 0.45rem;
+  }
+
+  .category-tab {
+    flex: 1 1 calc(50% - 0.45rem);
+  }
+}

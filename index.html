@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>4ukai: WoW Classic Setup</title>
+  <meta name="description" content="WoW Classic setup page for WeakAuras, addon profiles, macros and commands.">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="container py-4 py-lg-5">
+    <section class="wow-frame" id="imports">
+      <div class="frame-inner">
+        <div class="row g-3 align-items-end mb-4">
+          <div class="col-lg-6">
+            <label class="form-label wow-label" for="searchInput">Search</label>
+            <input id="searchInput" type="text" class="form-control wow-input" placeholder="Search imports...">
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label wow-label d-block">Category</label>
+            <div class="category-tabs" id="categoryTabs">
+              <button class="category-tab active" data-category="weakauras" type="button">WeakAuras</button>
+              <button class="category-tab" data-category="profiles" type="button">Addon Profiles</button>
+              <button class="category-tab" data-category="macros" type="button">Macros</button>
+              <button class="category-tab" data-category="commands" type="button">Commands</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="emptyState" class="empty-state d-none">
+          <h2 class="empty-title">No matching imports found.</h2>
+          <p class="empty-text mb-0">Try another search term or switch to another category.</p>
+        </div>
+
+        <div class="row g-4" id="importsGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="copyToast" class="toast text-bg-dark border border-warning-subtle" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-body" id="toastMessage">Copied.</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
