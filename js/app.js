@@ -138,9 +138,14 @@ const importsData = [
     importText: `/console WeatherDensity 3`
   },
   {
-    title: "Remove Screen Glow + Death Ghost Haze Effect",
+    title: "Remove Screen Glow",
     category: "commands",
     importText: `/console ffxGlow 0`
+  },
+  {
+    title: "Remove Blue Ghost Haze Effect",
+    category: "commands",
+    importText: `/console ffxDeath 0`
   },
   {
     title: "Enable Sharpening (Better quality)",
