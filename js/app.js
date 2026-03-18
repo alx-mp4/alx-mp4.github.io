@@ -80,9 +80,52 @@ const importsData = [
     importText: `nk12UTnmm0FOTbDX6IFnBjzbOOjykfB7fbiBl3iuvRal52K)(jA5SnG2hk8dKI8Wdjp0AS(OwT1oyhnEWnzVKMgTrWpMmPP4kZi8y1wTsf8UoTQjhzXpL)u9HH0BlO3BEuR2)WX72D)6ciTA9LZzYJVAUcf6Adda0qF8x67XVpiZq7PWhKX5X5GzmDfW)Il6ACEx5Lz0oy0naIZ3qKx2rtEENN(rJRl7pRizOnEBNELw9SzyY4peEdMR6nvsoctKcgHlLcuLU)ZvvA1f9gMqqPCgLujO11urjZ885dTpvO(V61pDDPtzfGHaalnHan596ozP7CbhZyCQGtevue7FDNJqybbjKCISwkLqg6I(a7Fi6sUI2p1N1q)lpSdod9rBkFjqGe115gES8y5eOoU)Wp2T975Qan3MMJC36nG6MsM2t)xGfc(nqqgy8S17NxcgbvdlpMGMnyogS86kWqqmzjTKXjGtvTemugRufLixakil8WMzGuJ58sezUfn3(dR8RzRXBZZYx4zfkEk86XqWNCNZ4Vjl69pp4(63igV)tvtpzC)5`
   },
   {
-    title: "To be added",
+    title: "Dual Wield Swap",
     category: "macros",
-    importText: `null`
+    importText: `/run PlaySound(1213)
+/equipslot 16 MAIN_HAND_WEAPON_NAME
+/equipslot 17 OFF_HAND_WEAPON_NAME`
+  },
+  {
+    title: "Shield Swap + Defensive Stance SB Switch",
+    category: "macros",
+    importText: `#showtooltip Shield Bash
+/run PlaySound(1212)
+/startattack
+/stopcasting [noworn:Shields]
+/equipslot 16 MAIN_HAND_WEAPON_NAME
+/equipslot 17 OFF_HAND_SHIELD_NAME
+/cast [stance:3,worn:Shields] Defensive Stance
+/cast Shield Bash`
+  },
+  {
+    title: "Universal Ranged Attack",
+    category: "macros",
+    importText: `#showtooltip
+/cast [worn:thrown] Throw; Shoot`
+  },
+  {
+    title: "HS Queue Canceling",
+    category: "macros",
+    importText: `#showtooltip
+/cast Heroic Strike
+/startattack
+/stopcasting`
+  },
+  {
+    title: "Berserker Stance Switch + BR",
+    category: "macros",
+    importText: `#showtooltip
+/startattack [combat,harm,nodead]
+/cast Berserker Rage
+/cast [nostance:3] Berserker Stance`
+  },
+  {
+    title: "Single Button Mount",
+    category: "macros",
+    importText: `#showtooltip
+/cancelaura [known:Bloodrage] Bloodrage
+/use [mod:ctrl] FLIGHT_MOUNT_NAME; GROUND_MOUNT_NAME`
   },
   {
     title: "Huge Camera Zoom Distance",
