@@ -87,6 +87,14 @@ const importsData = [
 /equipslot 17 OFF_HAND_WEAPON_NAME`
   },
   {
+    title: "Desync Swing Timers",
+    category: "macros",
+    importText: `/run PlaySound(3259)
+/cleartarget
+/targetlasttarget
+/startattack`
+  },
+  {
     title: "Shield Swap + Defensive Stance SB Switch",
     category: "macros",
     importText: `#showtooltip Shield Bash
