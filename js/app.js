@@ -140,11 +140,6 @@ const importsData = [
 /use [mod:ctrl] FLIGHT_MOUNT_NAME; GROUND_MOUNT_NAME`
   },
   {
-    title: "Huge Camera Zoom Distance",
-    category: "commands",
-    importText: `/console maxCameraDistance 50`
-  },
-  {
     title: "Reduce Weather Density",
     category: "commands",
     importText: `/console WeatherDensity 3`
