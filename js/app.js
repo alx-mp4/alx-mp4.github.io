@@ -299,7 +299,6 @@ const importsData = [
     importText: `#showtooltip Shield Bash
 /run PlaySound(1212)
 /startattack [combat,harm,nodead]
-/stopcasting [noworn:Shields]
 /equipslot 17 OFF_HAND_SHIELD_NAME
 /cast [nostance:2,worn:Shields] Defensive Stance
 /cast Shield Bash`
