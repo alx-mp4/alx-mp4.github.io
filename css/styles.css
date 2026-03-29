@@ -265,3 +265,50 @@ body {
     flex: 1 1 calc(50% - 0.45rem);
   }
 }
+
+/* Themed scrollbars */
+html {
+  scrollbar-color: #b89452 rgba(14, 10, 7, 0.9);
+  scrollbar-width: thin;
+}
+
+body,
+.import-box {
+  scrollbar-width: thin;
+  scrollbar-color: #b89452 rgba(14, 10, 7, 0.9);
+}
+
+body::-webkit-scrollbar,
+.import-box::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+body::-webkit-scrollbar-track,
+.import-box::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(16, 12, 8, 0.96), rgba(31, 22, 14, 0.96));
+  border: 1px solid rgba(92, 67, 31, 0.75);
+  box-shadow: inset 0 0 0 1px rgba(214, 180, 106, 0.08);
+}
+
+body::-webkit-scrollbar-corner,
+.import-box::-webkit-scrollbar-corner {
+  background: rgba(18, 14, 10, 0.98);
+}
+
+body::-webkit-scrollbar-thumb,
+.import-box::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d5bd7d, #9f7839);
+  border: 1px solid #5c431f;
+  box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.22);
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.import-box::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e0ca8c, #b88a43);
+}
+
+body::-webkit-scrollbar-thumb:active,
+.import-box::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #caaa67, #8d6731);
+}
