@@ -203,9 +203,9 @@ const importsData = [
 /cast [@mouseover,harm,nodead][] Revenge`
   },
   {
-    title: "Reduce Weather Density",
+    title: "Change Weather Density (0 = Clear, 1 = Light, 2 = Medium, 3 = Heavy)",
     category: "commands",
-    importText: `/console WeatherDensity 3`
+    importText: `/console WeatherDensity 0-3`
   },
   {
     title: "Remove Screen Glow",
