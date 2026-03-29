@@ -91,7 +91,7 @@ const importsData = [
 /startattack`
   },
   {
-    title: "Combined Thrown & Shoot",
+    title: "Combined Throw & Shoot",
     category: "macros",
     importText: `#showtooltip
 /cast [worn:thrown] Throw; Shoot`
