@@ -212,7 +212,7 @@ const importsData = [
     },
     importText: `#showtooltip
 /cast Heroic Strike
-/startattack [combat,harm,nodead]
+/startattack
 /stopcasting`
   },
   {
@@ -224,7 +224,7 @@ const importsData = [
     },
     importText: `#showtooltip
 /cancelaura Blessing of Protection
-/startattack [combat,harm,nodead]
+/startattack
 /cast Bloodthirst`
   },
   {
@@ -235,7 +235,7 @@ const importsData = [
       color: "#ff4d4d"
     },
     importText: `#showtooltip Charge
-/startattack [combat,harm,nodead]
+/startattack
 /cast [nostance:1] Battle Stance
 /cast Charge
 /cast Victory Rush`
@@ -248,7 +248,7 @@ const importsData = [
       color: "#ff4d4d"
     },
     importText: `#showtooltip Intercept
-/startattack [combat,harm,nodead]
+/startattack
 /cast [nostance:3] Berserker Stance
 /cast Intercept
 /cast Victory Rush`
@@ -272,7 +272,7 @@ const importsData = [
       color: "#ff4d4d"
     },
     importText: `#showtooltip Sweeping Strikes
-/startattack [combat,harm,nodead]
+/startattack
 /cast [nostance:3] Berserker Stance
 /cast [stance:3,combat] Bloodrage
 /cast Sweeping Strikes`
@@ -285,7 +285,7 @@ const importsData = [
       color: "#ff4d4d"
     },
     importText: `#showtooltip
-/startattack [combat,harm,nodead]
+/startattack
 /cast Berserker Rage
 /cast [nostance:3] Berserker Stance`
   },
@@ -298,7 +298,7 @@ const importsData = [
     },
     importText: `#showtooltip Shield Bash
 /run PlaySound(1212)
-/startattack [combat,harm,nodead]
+/startattack
 /equipslot 17 OFF_HAND_SHIELD_NAME
 /cast [nostance:2,worn:Shields] Defensive Stance
 /cast Shield Bash`
@@ -311,7 +311,7 @@ const importsData = [
       color: "#4dffbb"
     },
     importText: `#showtooltip Overpower
-/startattack [combat,harm,nodead]
+/startattack
 /cast [nostance:1] Battle Stance
 /cast [@mouseover,harm,nodead][] Overpower`
   },
@@ -323,7 +323,7 @@ const importsData = [
       color: "#4dffbb"
     },
     importText: `#showtooltip Revenge
-/startattack [combat,harm,nodead]
+/startattack
 /cast [nostance:2] Defensive Stance
 /cast [@mouseover,harm,nodead][] Revenge`
   },
