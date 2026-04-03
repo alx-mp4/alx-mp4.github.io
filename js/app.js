@@ -365,21 +365,9 @@ const importsData = [
   }
 ];
 
-const SITE_PASSWORD = "tercite123";
-const ACCESS_KEY = "4ukai_access_granted";
-
 const state = {
   search: "",
   category: "weakauras"
-};
-
-const gateElements = {
-  gateScreen: document.getElementById("gateScreen"),
-  siteContent: document.getElementById("siteContent"),
-  gateForm: document.getElementById("gateForm"),
-  passwordInput: document.getElementById("passwordInput"),
-  gateError: document.getElementById("gateError"),
-  logoutBtn: document.getElementById("logoutBtn")
 };
 
 const elements = {
@@ -391,60 +379,10 @@ const elements = {
   toastMessage: document.getElementById("toastMessage")
 };
 
-let toast = null;
-let appInitialized = false;
+const toast = bootstrap.Toast.getOrCreateInstance(elements.copyToast, { delay: 2000 });
 
-initAccessGate();
-
-function initAccessGate() {
-  gateElements.gateForm.addEventListener("submit", handlePasswordSubmit);
-  gateElements.logoutBtn.addEventListener("click", logout);
-
-  const alreadyUnlocked = localStorage.getItem(ACCESS_KEY) === "true";
-  if (alreadyUnlocked) {
-    unlockSite();
-  } else {
-    gateElements.passwordInput.focus();
-  }
-}
-
-function handlePasswordSubmit(event) {
-  event.preventDefault();
-
-  const enteredPassword = gateElements.passwordInput.value;
-  if (enteredPassword === SITE_PASSWORD) {
-    localStorage.setItem(ACCESS_KEY, "true");
-    gateElements.passwordInput.value = "";
-    unlockSite();
-    return;
-  }
-
-  gateElements.gateError.classList.remove("d-none");
-  gateElements.passwordInput.value = "";
-  gateElements.passwordInput.focus();
-}
-
-function unlockSite() {
-  gateElements.gateError.classList.add("d-none");
-  gateElements.gateScreen.classList.add("d-none");
-  gateElements.siteContent.classList.remove("d-none");
-
-  if (!appInitialized) {
-    toast = bootstrap.Toast.getOrCreateInstance(elements.copyToast, { delay: 2000 });
-    bindEvents();
-    render();
-    appInitialized = true;
-  }
-}
-
-function logout() {
-  localStorage.removeItem(ACCESS_KEY);
-  gateElements.siteContent.classList.add("d-none");
-  gateElements.gateScreen.classList.remove("d-none");
-  gateElements.gateError.classList.add("d-none");
-  gateElements.passwordInput.value = "";
-  gateElements.passwordInput.focus();
-}
+bindEvents();
+render();
 
 function bindEvents() {
   elements.searchInput.addEventListener("input", (event) => {

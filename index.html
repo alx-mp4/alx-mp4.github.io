@@ -10,64 +10,39 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div id="gateScreen" class="gate-screen">
-    <div class="gate-panel">
-      <h1 class="gate-title">Private Access</h1>
-      <p class="gate-text">Enter the password to view this page.</p>
-
-      <form id="gateForm" class="gate-form">
-        <input
-          id="passwordInput"
-          type="password"
-          class="form-control wow-input"
-          placeholder="Password"
-          autocomplete="current-password"
-        >
-        <button type="submit" class="copy-btn gate-btn">Enter</button>
-      </form>
-
-      <p id="gateError" class="gate-error d-none">Wrong password.</p>
-    </div>
-  </div>
-
-  <div id="siteContent" class="d-none">
-    <main class="container py-4 py-lg-5">
-      <div class="d-flex justify-content-end mb-3">
-        <button id="logoutBtn" class="copy-btn" type="button">Logout</button>
-      </div>
-
-      <section class="wow-frame" id="imports">
-        <div class="frame-inner">
-          <div class="row g-3 align-items-end mb-4">
-            <div class="col-lg-6">
-              <label class="form-label wow-label" for="searchInput">Search</label>
-              <input id="searchInput" type="text" class="form-control wow-input" placeholder="Search imports...">
-            </div>
-            <div class="col-lg-6">
-              <label class="form-label wow-label d-block">Category</label>
-              <div class="category-tabs" id="categoryTabs">
-                <button class="category-tab active" data-category="weakauras" type="button">WeakAuras</button>
-                <button class="category-tab" data-category="profiles" type="button">Addon Profiles</button>
-                <button class="category-tab" data-category="macros" type="button">Macros</button>
-                <button class="category-tab" data-category="commands" type="button">Commands</button>
-              </div>
+  <main class="container py-4 py-lg-5">
+    <section class="wow-frame" id="imports">
+      <div class="frame-inner">
+        <div class="row g-3 align-items-end mb-4">
+          <div class="col-lg-6">
+            <label class="form-label wow-label" for="searchInput">Search</label>
+            <input id="searchInput" type="text" class="form-control wow-input" placeholder="Search imports...">
+          </div>
+          <div class="col-lg-6">
+            <label class="form-label wow-label d-block">Category</label>
+            <div class="category-tabs" id="categoryTabs">
+              <button class="category-tab active" data-category="weakauras" type="button">WeakAuras</button>
+              <button class="category-tab" data-category="profiles" type="button">Addon Profiles</button>
+              <button class="category-tab" data-category="macros" type="button">Macros</button>
+              <button class="category-tab" data-category="commands" type="button">Commands</button>
             </div>
           </div>
-
-          <div id="emptyState" class="empty-state d-none">
-            <h2 class="empty-title">No matching imports found.</h2>
-            <p class="empty-text mb-0">Try another search term or switch to another category.</p>
-          </div>
-
-          <div class="row g-4" id="importsGrid"></div>
         </div>
-      </section>
-    </main>
 
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div id="copyToast" class="toast text-bg-dark border border-warning-subtle" role="status" aria-live="polite" aria-atomic="true">
-        <div class="toast-body" id="toastMessage">Copied.</div>
+
+        <div id="emptyState" class="empty-state d-none">
+          <h2 class="empty-title">No matching imports found.</h2>
+          <p class="empty-text mb-0">Try another search term or switch to another category.</p>
+        </div>
+
+        <div class="row g-4" id="importsGrid"></div>
       </div>
+    </section>
+  </main>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="copyToast" class="toast text-bg-dark border border-warning-subtle" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-body" id="toastMessage">Copied.</div>
     </div>
   </div>
 
