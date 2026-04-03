@@ -148,6 +148,18 @@ const importsData = [
 /startattack`
   },
   {
+    title: "Rocket Boots Insta Use Swap",
+    category: "macros",
+    tag: {
+      label: "Utility",
+      color: "#4dffbb"
+    },
+    importText: `#showtooltip
+/equip Rocket Boots Xtreme
+/use 8
+/run C_Timer.After(0.2,function() EquipItemByName("NORMAL_BOOTS_NAME") end)`
+  },
+  {
     title: "Combined Throw & Shoot",
     category: "macros",
     tag: {
