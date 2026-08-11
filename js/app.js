@@ -307,7 +307,20 @@ const importsData = [
     title: "Enable Sharpening (Better quality)",
     category: "commands",
     importText: `/console set ResampleAlwaysSharpen 1`
-  }
+  },
+  // ------------ ASSETS
+  {
+    title: "Chat Bubble Replacements",
+    category: "assets",
+    file: "assets/ChatBubbleReplacements.zip",
+    description: "Various chat bubble styles."
+  },
+  {
+    title: "HD Icon Retextures",
+    category: "assets",
+    file: "assets/HDIconRetextures.zip",
+    description: "High-definition retextures for all icons."
+  },
 ];
 
 const state = {
@@ -363,7 +376,10 @@ function bindEvents() {
 function getVisibleImports() {
   return importsData.filter((entry) => {
     const matchesCategory = entry.category === state.category;
-    const haystack = [entry.title, entry.importText, formatCategory(entry.category)].join(" ").toLowerCase();
+    const haystack = [entry.title, entry.importText, entry.description, formatCategory(entry.category)]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
     const matchesSearch = !state.search || haystack.includes(state.search);
     return matchesCategory && matchesSearch;
   });
@@ -381,6 +397,8 @@ function renderCard(entry, index) {
   const cardStyle = tagColor ? `style="--entry-tag-color: ${tagColor};"` : "";
   const hasTagClass = entry.tag ? " has-tag" : "";
 
+  const body = entry.file ? renderAssetBody(entry) : renderImportBody(entry, index);
+
   return `
     <div class="col-12 col-xl-6">
       <article class="import-card${hasTagClass}" ${cardStyle}>
@@ -389,14 +407,34 @@ function renderCard(entry, index) {
             <h2 class="card-title mb-0">${escapeHtml(entry.title)}</h2>
             ${entry.tag ? `<span class="entry-tag">${tagLabel}</span>` : ""}
           </div>
-
-          <textarea class="import-box" readonly>${escapeHtml(entry.importText)}</textarea>
-
-          <div class="card-actions">
-            <button class="copy-btn" type="button" data-copy-index="${index}">Copy Import</button>
-          </div>
+          ${body}
         </div>
       </article>
+    </div>
+  `;
+}
+
+function renderImportBody(entry, index) {
+  return `
+    <textarea class="import-box" readonly>${escapeHtml(entry.importText)}</textarea>
+
+    <div class="card-actions">
+      <button class="copy-btn" type="button" data-copy-index="${index}">Copy Import</button>
+    </div>
+  `;
+}
+
+function renderAssetBody(entry) {
+  const description = entry.description ? `<p class="asset-description">${escapeHtml(entry.description)}</p>` : "";
+  const fileName = entry.file.split("/").pop();
+
+  return `
+    ${description}
+
+    <div class="card-actions">
+      <a class="copy-btn download-btn" href="${escapeHtml(entry.file)}" download="${escapeHtml(fileName)}">
+        Download ${escapeHtml(fileName)}
+      </a>
     </div>
   `;
 }
@@ -406,7 +444,8 @@ function formatCategory(category) {
     weakauras: "WeakAuras",
     profiles: "Addon Profiles",
     macros: "Macros",
-    commands: "Commands"
+    commands: "Commands",
+    assets: "Assets"
   };
   return labels[category] || category;
 }

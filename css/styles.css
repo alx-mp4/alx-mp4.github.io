@@ -243,6 +243,19 @@ body {
   transition: transform 0.15s ease, filter 0.15s ease;
 }
 
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.asset-description {
+  margin-bottom: 0;
+  min-height: 2.5rem;
+}
+
 .toast {
   border-radius: 0;
   background: linear-gradient(180deg, rgba(33, 26, 18, 0.98), rgba(17, 13, 9, 0.98)) !important;
