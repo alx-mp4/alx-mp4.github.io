@@ -313,13 +313,13 @@ const importsData = [
     title: "Chat Bubble Replacements",
     category: "assets",
     file: "assets/ChatBubbleReplacements.zip",
-    description: "Various chat bubble styles. Instructions inside."
+    description: "Various chat bubble styles."
   },
   {
     title: "HD Icon Retextures",
     category: "assets",
     file: "assets/HDIconRetextures.zip",
-    description: "High-definition retextures for all icons until WOTLK. Instructions inside."
+    description: "High-definition retextures for all icons until WOTLK."
   },
 ];
 
