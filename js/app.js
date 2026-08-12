@@ -319,8 +319,8 @@ const importsData = [
     title: "HD Icon Retextures",
     category: "assets",
     file: "assets/HDIconRetextures.zip",
-    description: "High-definition retextures for all icons until WOTLK."
-  },
+    description: "High-definition retextures for all icons until WOTLK included."
+  }
 ];
 
 const state = {
