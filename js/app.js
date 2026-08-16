@@ -11,7 +11,7 @@ const importsData = [
   },
   // ------------ PROFILES
   {
-    title: "ElvUI Profile",
+    title: "ElvUI Profile | 1080p; 0.71 Scale",
     category: "profiles",
     tag: {
       label: "ElvUI #1",
