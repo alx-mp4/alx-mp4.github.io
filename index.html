@@ -1,53 +1,78 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>4ukai: WoW Classic Setup</title>
-  <meta name="description" content="WoW Classic setup page for WeakAuras, addon profiles, macros and commands.">
+  <title>4ukai — WoW TBC Classic setup</title>
+  <meta name="description" content="WeakAuras, addon profiles, macros, console commands and texture packs for World of Warcraft TBC Classic. Search it, fill in your item names, copy it.">
+  <meta name="color-scheme" content="dark">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <main class="container py-4 py-lg-5">
-    <section class="wow-frame" id="imports">
-      <div class="frame-inner">
-        <div class="row g-3 align-items-end mb-4">
-          <div class="col-lg-6">
-            <label class="form-label wow-label" for="searchInput">Search</label>
-            <input id="searchInput" type="text" class="form-control wow-input" placeholder="Search imports...">
-          </div>
-          <div class="col-lg-6">
-            <label class="form-label wow-label d-block">Category</label>
-            <div class="category-tabs" id="categoryTabs">
-              <button class="category-tab active" data-category="weakauras" type="button">WeakAuras</button>
-              <button class="category-tab" data-category="profiles" type="button">Addon Profiles</button>
-              <button class="category-tab" data-category="macros" type="button">Macros</button>
-              <button class="category-tab" data-category="commands" type="button">Commands</button>
-              <button class="category-tab" data-category="assets" type="button">Assets</button>
-            </div>
-          </div>
+  <canvas id="motes" aria-hidden="true"></canvas>
+
+  <header class="masthead">
+    <div class="shell">
+      <div class="masthead-top">
+        <div>
+          <h1 class="wordmark display">
+            <span class="sigil" aria-hidden="true">&#10209;</span>
+            <span>4ukai</span>
+            <span class="realm">TBC Classic</span>
+          </h1>
+          <p class="tagline">Everything I run, ready to paste. Search it, fill in your own item names, copy it.</p>
         </div>
 
-
-        <div id="emptyState" class="empty-state d-none">
-          <h2 class="empty-title">No matching results found.</h2>
-          <p class="empty-text mb-0">Try another search term or switch to another category.</p>
-        </div>
-
-        <div class="row g-4" id="importsGrid"></div>
       </div>
-    </section>
-  </main>
+    </div>
+  </header>
 
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="copyToast" class="toast text-bg-dark border border-warning-subtle" role="status" aria-live="polite" aria-atomic="true">
-      <div class="toast-body" id="toastMessage">Copied.</div>
+  <div class="toolbar">
+    <div class="shell">
+      <div class="search-row">
+        <span class="glyph" aria-hidden="true">&#8981;</span>
+        <label class="sr-only" for="searchInput">Search imports</label>
+        <input id="searchInput" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Search titles, macro text, tags&hellip;">
+        <button class="clear-search" id="clearSearch" type="button">Clear</button>
+        <span class="kbd-hint" aria-hidden="true"><kbd>/</kbd></span>
+      </div>
+
+      <div class="tabs" id="tabs" role="tablist" aria-label="Category"></div>
+      <div class="chips" id="chips"></div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <main class="shell">
+    <p class="results-line" id="resultsLine" role="status" aria-live="polite"></p>
+
+    <div class="empty hidden" id="emptyState">
+      <h2 class="display">Nothing matches that.</h2>
+      <p id="emptyHint">Try a shorter search term, or clear the filters to see everything.</p>
+      <button class="btn" type="button" id="resetAll">Clear filters</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="foot">
+    <div class="shell">
+      <p>Macros with a dashed field take your own item name &mdash; type it in and the copy button hands over the finished macro.</p>
+      <p>Addon profiles list the version they were exported from. Importing into an older build usually fails.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" title="Back to top">
+    <span aria-hidden="true">&uarr;</span><span class="sr-only">Back to top</span>
+  </button>
+
+  <div class="toast-dock" id="toastDock" aria-live="polite" aria-atomic="false"></div>
+
+  <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
