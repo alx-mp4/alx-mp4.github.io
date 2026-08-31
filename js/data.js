@@ -446,7 +446,7 @@ const importsData = [
 const addonsData = [
   {
     name: "ElvUI",
-    url: "https://www.tukui.org/",
+    url: "https://tukui.org/elvui",
   },
   {
     name: "WeakAuras",
