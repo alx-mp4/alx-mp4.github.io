@@ -6,7 +6,9 @@
 
 :root {
   --font-ui: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  --font-mono: "Roboto Mono", ui-monospace, "SF Mono", Consolas, "Courier New", monospace;
+  /* Roboto everywhere, including the code boxes. The variable stays so the
+     "this is metadata / this is code" split is still visible in the rules. */
+  --font-mono: var(--font-ui);
 
   --bg: #0e0f12;
   --bg-2: #15171b;
@@ -39,14 +41,18 @@
   --class-warlock: #8788EE;
   --class-warrior: #C69B6D;
 
-  /* Non-class tag colours: deliberately neutral. Every class colour sits
-     at 44% saturation or higher, these at 10-20%, so they can never read
-     as a class. Core is the brighter of the two because it means
-     "start here"; role is quieter. */
-  --tag-core: #C2CAD6;
-  --role-dps: #FF0000;
-  --role-tank: #0000FF;
-  --role-healer: #00FF00;
+  /* Platform colours. Not class colours — they only ever appear on the
+     social links and the Discord dialog. */
+  --brand-twitch: #9146FF;
+  --brand-instagram: #F56040;
+  --brand-discord: #5865F2;
+
+  /* Role colours. Pulled off the pure 255 channels to about 205 and given
+     a small floor on the other two, so they read as role markers rather
+     than warning lights. */
+  --role-dps: #CD3A3A;
+  --role-tank: #3A5ACD;
+  --role-healer: #3ACD62;
 
 }
 
@@ -95,7 +101,7 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: url("../assets/background.jpg") center top / cover no-repeat;
+  background: url("../assets/core/background.jpg") center top / cover no-repeat;
   opacity: var(--bg-image-opacity);
   mix-blend-mode: luminosity;
   pointer-events: none;
@@ -188,6 +194,90 @@ pre,
   max-width: 46ch;
   color: var(--muted);
   font-size: 0.94rem;
+}
+
+/* Brand block: wordmark on the left, social icons pinned right on the
+   same line, tagline underneath both. */
+.brand {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.brand-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem 1.5rem;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Each link sets its own --brand; everything below reads from that, so a
+   new platform is one rule: class + colour + icon. */
+.social-link {
+  --brand: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--brand);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease,
+              box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 18%, var(--panel-2));
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brand) 32%, transparent);
+}
+
+/* The SVGs are used as masks rather than images, so the brand colour comes
+   from CSS and whatever fill is baked into the file is irrelevant. */
+.social-icon {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.social-link.is-twitch {
+  --brand: var(--brand-twitch);
+}
+
+.social-link.is-twitch .social-icon {
+  --icon: url("../assets/brand/twitch.svg");
+}
+
+.social-link.is-instagram {
+  --brand: var(--brand-instagram);
+}
+
+.social-link.is-instagram .social-icon {
+  --icon: url("../assets/brand/instagram.svg");
+}
+
+.social-link.is-discord {
+  --brand: var(--brand-discord);
+}
+
+.social-link.is-discord .social-icon {
+  --icon: url("../assets/brand/discord.svg");
 }
 
 
@@ -289,8 +379,34 @@ body.is-searching .kbd-hint {
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.4rem 0;
   margin-top: 0.6rem;
+}
+
+/* "All" is its own thing, so it gets a taller rule and real breathing room.
+   The category tabs behind it stay packed with hairlines between. */
+.tab-split {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 26px;
+  margin: 0 0.75rem;
+  background: var(--line-strong);
+}
+
+.tab-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0;
+}
+
+.tab-sep {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 15px;
+  margin: 0 0.3rem;
+  background: var(--line);
 }
 
 .tab {
@@ -341,6 +457,10 @@ body.is-searching .kbd-hint {
 
 /* Tag filter chips, grouped by facet */
 
+.chips[hidden] {
+  display: none;
+}
+
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -361,6 +481,12 @@ body.is-searching .kbd-hint {
 
 .chip-group:last-child {
   border-right: 0;
+}
+
+/* Saved is not a facet — push the real facets away from it. */
+.chip-group-saved {
+  padding-right: 0.85rem;
+  margin-right: 0.5rem;
 }
 
 .chips-label {
@@ -461,6 +587,79 @@ body.is-searching .kbd-hint {
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* The Addons tab: one wide, centred column instead of the card grid. Two
+   classes outweigh the plain .grid rules in the min-width queries, so this
+   holds at every breakpoint. */
+.grid.is-wide {
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  gap: 0.7rem;
+}
+
+.addon-card {
+  --tag: var(--accent);
+}
+
+.addon-body {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.addon-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.addon-name {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.addon-name mark {
+  padding: 0 0.1em;
+  background: color-mix(in srgb, var(--accent) 34%, transparent);
+  color: var(--text);
+  border-radius: 2px;
+}
+
+.addon-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.addon-tag {
+  padding: 0.34rem 0.5rem 0.28rem;
+  border: 1px solid var(--line-strong);
+  background: var(--code-bg);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.addon-note {
+  margin: 0.55rem 0 0;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.addon-actions {
+  flex: 0 0 auto;
 }
 
 /* ---------- Card ---------- */
@@ -588,9 +787,20 @@ body.is-searching .kbd-hint {
   margin: 0.55rem 0 0.7rem;
   font-family: var(--font-mono);
   font-size: 0.66rem;
+  line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+/* All-caps text hangs high in its line box: the cap height leaves more
+   room underneath than above. The extra top padding puts it back on the
+   optical centre of the pill. */
+.t-class,
+.t-role,
+.t-raid {
+  padding: 0.34rem 0.5rem 0.28rem;
+  line-height: 1;
 }
 
 /* class — the only coloured chip */
@@ -598,7 +808,7 @@ body.is-searching .kbd-hint {
   display: inline-flex;
   align-items: center;
   gap: 0.34rem;
-  padding: 0.16rem 0.46rem 0.16rem 0.4rem;
+  padding-left: 0.42rem;
   border: 1px solid color-mix(in srgb, var(--tag) 45%, transparent);
   background: color-mix(in srgb, var(--tag) 13%, transparent);
   color: color-mix(in srgb, var(--tag) 78%, var(--text));
@@ -619,7 +829,6 @@ body.is-searching .kbd-hint {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.16rem 0.46rem;
   border: 1px solid color-mix(in srgb, var(--tag) 50%, transparent);
   background: color-mix(in srgb, var(--tag) 13%, transparent);
   color: color-mix(in srgb, var(--tag) 80%, var(--text));
@@ -628,22 +837,17 @@ body.is-searching .kbd-hint {
 
 /* raid — neutral, dimmer than role */
 .t-raid {
-  padding: 0.16rem 0.46rem;
   border: 1px dashed color-mix(in srgb, var(--text) 34%, transparent);
   color: color-mix(in srgb, var(--text) 72%, transparent);
 }
 
-/* core — a marker, not a colour */
-.t-core {
-  --tag: var(--tag-core);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.16rem 0.46rem;
-  border: 1px solid color-mix(in srgb, var(--tag) 55%, transparent);
-  background: color-mix(in srgb, var(--tag) 15%, transparent);
-  color: color-mix(in srgb, var(--tag) 82%, var(--text));
-  font-weight: 500;
+/* Divider between the tag pills and the plain metadata that follows. */
+.meta-rule {
+  width: 1px;
+  align-self: stretch;
+  min-height: 15px;
+  margin: 0 0.24rem;
+  background: var(--line-strong);
 }
 
 /* version — plain metadata, never a chip */
@@ -840,6 +1044,144 @@ body.is-searching .kbd-hint {
   display: none !important;
 }
 
+/* ---------- Discord dialog ---------- */
+
+/* The veil stays in the DOM while it fades, so the blur has something to
+   animate on the way out. `hidden` is only set once the fade finishes. */
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(6, 7, 9, 0.55);
+  backdrop-filter: blur(9px) saturate(0.85);
+  -webkit-backdrop-filter: blur(9px) saturate(0.85);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.veil[hidden] {
+  display: none;
+}
+
+.veil.is-open {
+  opacity: 1;
+}
+
+.modal {
+  --brand: var(--brand-discord);
+  position: relative;
+  overflow: hidden;
+  width: min(430px, 100%);
+  padding: 1.7rem 1.5rem 1.5rem;
+  border: 1px solid var(--line-strong);
+  border-top: 2px solid var(--brand);
+  background: var(--panel-solid);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.55),
+    0 0 46px color-mix(in srgb, var(--brand) 22%, transparent);
+  text-align: center;
+  transform: translateY(12px) scale(0.985);
+  transition: transform 0.3s ease;
+}
+
+.veil.is-open .modal {
+  transform: none;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.modal-close:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+  background: var(--code-bg);
+}
+
+.modal-icon {
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 0.75rem;
+  background-color: var(--brand);
+  -webkit-mask: url("../assets/brand/discord.svg") center / contain no-repeat;
+  mask: url("../assets/brand/discord.svg") center / contain no-repeat;
+}
+
+.modal-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.modal-note {
+  margin: 0 auto 1rem;
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.modal-note b {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.modal-tag {
+  margin: 0;
+  padding: 0.7rem 0.5rem;
+  border: 1px dashed color-mix(in srgb, var(--brand) 55%, var(--line-strong));
+  background: var(--code-bg);
+  color: var(--text);
+  font-size: 1.15rem;
+  letter-spacing: 0.16em;
+  user-select: all;
+}
+
+.modal-fineprint {
+  margin: 0.7rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Countdown to the auto-close, so the dialog doesn't vanish unannounced. */
+.modal-timer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--brand);
+  transform-origin: left center;
+  animation: modal-timer 10s linear forwards;
+}
+
+@keyframes modal-timer {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
 /* ---------- Toast ---------- */
 
 .toast-dock {
@@ -986,6 +1328,12 @@ body::-webkit-scrollbar-thumb:hover,
   .card:hover {
     transform: none;
   }
+
+  /* The global animation override collapses this instantly, which reads as
+     a glitch. The 5s timer in JS is unaffected. */
+  .modal-timer {
+    display: none;
+  }
 }
 
 @media (max-width: 700px) {
@@ -1023,6 +1371,45 @@ body::-webkit-scrollbar-thumb:hover,
 
   .masthead-top {
     align-items: center;
+  }
+
+  .tab-group {
+    flex-wrap: nowrap;
+  }
+
+  /* Addon rows stack: the button drops under the text rather than
+     squeezing the note into a column. */
+  .addon-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1rem;
+  }
+
+  .addon-actions {
+    width: 100%;
+  }
+
+  .addon-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Icons drop under the wordmark here, so shrink them a little and pull
+     them to the left edge rather than leaving them stranded right. */
+  .brand-row {
+    justify-content: flex-start;
+    gap: 0.7rem 1rem;
+  }
+
+  .social-link {
+    width: 38px;
+    height: 38px;
+  }
+
+  .social-icon {
+    width: 19px;
+    height: 19px;
   }
 
   .theme-switch {

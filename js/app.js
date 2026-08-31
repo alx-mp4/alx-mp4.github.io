@@ -8,10 +8,13 @@
 
   const SEARCHABLE_BODY = 2000;     // don't index 26 KB of base64 gibberish
 
+  /* "addons" is the odd one out: it reads from addonsData, not importsData,
+     and renders as one wide column with no filters. */
   const CATEGORIES = [
-    { id: "all", label: "Everything" },
+    { id: "all", label: "All" },
+    { id: "addons", label: "Addons" },
     { id: "weakauras", label: "WeakAuras" },
-    { id: "profiles", label: "Addons" },
+    { id: "profiles", label: "Profiles" },
     { id: "macros", label: "Macros" },
     { id: "commands", label: "Commands" },
     { id: "assets", label: "Assets" }
@@ -29,7 +32,7 @@
   const roleVar = (name) => `var(--role-${name.toLowerCase()})`;
 
   /* Roles stay neutral and are read from their label. No glyphs: the
-     crossed-swords and shield code points are missing from Roboto Mono
+     crossed-swords and shield code points are missing from Roboto
      and fall back to tofu on Windows. */
   const ROLE_ORDER = ["Tank", "Healer", "DPS"];
 
@@ -106,7 +109,6 @@
     if (raw.class) entry.keys.push(`class:${raw.class}`);
     [...entry.roles].sort((a, b) => ROLE_ORDER.indexOf(a) - ROLE_ORDER.indexOf(b)).forEach((r) => entry.keys.push(`role:${r}`));
     if (raw.raid) entry.keys.push(`raid:${raw.raid}`);
-    if (raw.core) entry.keys.push("core:1");
 
     entry.haystack = [
       raw.title,
@@ -118,7 +120,6 @@
       raw.version,
       raw.boss,
       entry.note,
-      raw.core ? "core" : "",
       labelFor(raw.category),
       text.length <= SEARCHABLE_BODY ? text : ""
     ]
@@ -128,10 +129,26 @@
     return entry;
   });
 
+  /* The Addons tab. A flat list from data.js, searchable but never filtered
+     by class/role/raid — those facets mean nothing here. */
+  const addons = (typeof addonsData === "undefined" ? [] : addonsData).map((raw, i) => ({
+    ...raw,
+    id: slug("addon", raw.name, i),
+    tags: raw.tags || [],
+    haystack: [raw.name, raw.note, (raw.tags || []).join(" "), "addon"]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase()
+  }));
+
+  function visibleAddons() {
+    const t = terms();
+    return addons.filter((a) => !t.length || t.every((term) => a.haystack.includes(term)));
+  }
+
   // Human label for a filter key
   function keyLabel(key) {
     const [facet, value] = splitKey(key);
-    if (facet === "core") return "Core";
     if (facet === "raid") return value;
     return value;
   }
@@ -195,7 +212,12 @@
     resetAll: document.getElementById("resetAll"),
     results: document.getElementById("resultsLine"),
     toasts: document.getElementById("toastDock"),
-    toTop: document.getElementById("toTop")
+    toTop: document.getElementById("toTop"),
+    discordBtn: document.getElementById("discordTag"),
+    discordVeil: document.getElementById("discordVeil"),
+    discordClose: document.getElementById("discordModalClose"),
+    discordStatus: document.getElementById("discordModalStatus"),
+    discordTimer: document.querySelector("#discordVeil .modal-timer")
   };
 
   /* ---------- filtering ---------- */
@@ -232,16 +254,32 @@
 
   /* ---------- chrome ---------- */
 
+  function countFor(id, pool) {
+    if (id === "all") return pool.length;
+    if (id === "addons") return visibleAddons().length;
+    return pool.filter((e) => e.category === id).length;
+  }
+
+  /* "All" is set apart by a full-height rule; the rest sit close together
+     with hairlines between them. */
   function renderTabs() {
     const pool = entries.filter(matchesFilters);
-    el.tabs.innerHTML = CATEGORIES.map((cat) => {
-      const n = cat.id === "all" ? pool.length : pool.filter((e) => e.category === cat.id).length;
-      const selected = state.category === cat.id;
+
+    const tab = (cat) => {
+      const n = countFor(cat.id, pool);
       return `<button class="tab${n ? "" : " is-empty"}" type="button" role="tab"
-                aria-selected="${selected}" data-cat="${cat.id}">
+                aria-selected="${state.category === cat.id}" data-cat="${cat.id}">
                 ${cat.label}<span class="count">${n}</span>
               </button>`;
-    }).join("");
+    };
+
+    const [all, ...rest] = CATEGORIES;
+    el.tabs.innerHTML =
+      tab(all) +
+      `<span class="tab-split" aria-hidden="true"></span>` +
+      `<span class="tab-group">` +
+      rest.map(tab).join(`<span class="tab-sep" aria-hidden="true"></span>`) +
+      `</span>`;
   }
 
   const FACETS = [
@@ -250,13 +288,12 @@
     { id: "raid", label: "Raid" }
   ];
 
-  // Colour comes from the facet, never from the entry — and only class
-  // and Core get one. Everything else is neutral by design.
+  // Colour comes from the facet, never from the entry — and only class and
+  // role get one. Everything else is neutral by design.
   function keyColour(key) {
     const [facet, value] = splitKey(key);
     if (facet === "class") return classVar(value);
     if (facet === "role") return roleVar(value);
-    if (facet === "core") return "var(--tag-core)";
     return "var(--line-strong)";
   }
 
@@ -269,7 +306,7 @@
     const chip = (key, label, n, colour) => {
       // Facets that carry a colour also carry a dot, so the bar reads the
       // same way the cards do.
-      const coloured = ["class", "role", "core"].includes(splitKey(key)[0]);
+      const coloured = ["class", "role"].includes(splitKey(key)[0]);
       return `<button class="chip${coloured ? " chip-dot" : ""}" type="button"
          data-key="${escapeAttr(key)}" aria-pressed="${state.keys.has(key)}"
          style="--chip: ${colour}">${escapeHtml(label)}<span class="n">${n}</span></button>`;
@@ -277,12 +314,12 @@
 
     let html = "";
 
+    // Saved sits on its own with no facet label — it is the only thing in
+    // its group, so a heading would just be noise.
     const savedCount = entries.filter((e) => favourites.has(e.id)).length;
-    const coreCount = counts.get("core:1") || 0;
-    html += `<span class="chip-group"><span class="chips-label">Show</span>`;
+    html += `<span class="chip-group chip-group-saved">`;
     html += `<button class="chip" type="button" data-saved="1" aria-pressed="${state.savedOnly}"
                style="--chip: var(--warn)">&#9733; Saved<span class="n">${savedCount}</span></button>`;
-    if (coreCount) html += chip("core:1", "Core", coreCount, "var(--tag-core)");
     html += `</span>`;
 
     FACETS.forEach((facet) => {
@@ -311,7 +348,15 @@
   /* ---------- cards ---------- */
 
   function render() {
+    if (state.category === "addons") {
+      renderAddons();
+      return;
+    }
+
     const list = visible();
+
+    el.chips.hidden = false;
+    el.grid.classList.remove("is-wide");
 
     renderTabs();
     renderChips();
@@ -325,7 +370,7 @@
     } else {
       const elsewhere = entries.filter((e) => matchesQuery(e)).length;
       el.emptyHint.textContent = elsewhere
-        ? `No match in ${labelFor(state.category).toLowerCase()}, but "${state.query}" turns up ${elsewhere} elsewhere. Try Everything.`
+        ? `No match in ${labelFor(state.category).toLowerCase()}, but "${state.query}" turns up ${elsewhere} elsewhere. Try All.`
         : `No import matches "${state.query}". Try a shorter or different term.`;
     }
 
@@ -340,6 +385,75 @@
       if (target) target.scrollIntoView({ block: "center" });
       state.focusId = "";
     }
+  }
+
+  /* Addons get the full width of the shell and no filter bar: there is
+     nothing here to filter by, and the rows read better wide. */
+  function renderAddons() {
+    const list = visibleAddons();
+
+    el.chips.hidden = true;
+    el.grid.classList.add("is-wide");
+
+    renderTabs();
+
+    el.results.innerHTML = `<span><b>${list.length}</b> ${
+      list.length === 1 ? "addon" : "addons"
+    }${state.query ? ` for &ldquo;${escapeHtml(state.query)}&rdquo;` : ""}</span>`;
+
+    el.empty.classList.toggle("hidden", list.length > 0);
+    el.emptyHint.textContent = state.query
+      ? `No addon matches "${state.query}".`
+      : "The addon list is empty.";
+
+    const frag = document.createDocumentFragment();
+    list.forEach((addon, i) => frag.appendChild(buildAddonCard(addon, i)));
+    el.grid.replaceChildren(frag);
+
+    document.body.classList.toggle("is-searching", Boolean(state.query));
+  }
+
+  function buildAddonCard(addon, index) {
+    const card = element("article", "card addon-card");
+    card.dataset.id = addon.id;
+    card.style.setProperty("--d", `${Math.min(index, 14) * 22}ms`);
+
+    const body = element("div", "addon-body");
+
+    const main = element("div", "addon-main");
+    const name = element("h2", "addon-name");
+    name.innerHTML = highlight(addon.name, terms());
+    main.appendChild(name);
+
+    if (addon.tags.length) {
+      const tags = element("div", "addon-tags");
+      tags.innerHTML = addon.tags
+        .map((t) => `<span class="addon-tag">${escapeHtml(t)}</span>`)
+        .join("");
+      main.appendChild(tags);
+    }
+
+    if (addon.note) {
+      const note = element("p", "addon-note");
+      note.textContent = addon.note;
+      main.appendChild(note);
+    }
+
+    body.appendChild(main);
+
+    if (addon.url) {
+      const actions = element("div", "addon-actions");
+      const link = element("a", "btn");
+      link.href = addon.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Get it";
+      actions.appendChild(link);
+      body.appendChild(actions);
+    }
+
+    card.appendChild(body);
+    return card;
   }
 
   function buildCard(entry, index) {
@@ -383,7 +497,6 @@
     const meta = element("div", "meta");
     const bits = [];
 
-    if (entry.core) bits.push(`<span class="t-core">Core</span>`);
     if (entry.class)
       bits.push(`<span class="t-class" style="--tag: ${classVar(entry.class)}">${escapeHtml(entry.class)}</span>`);
     [...entry.roles].sort((a, b) => ROLE_ORDER.indexOf(a) - ROLE_ORDER.indexOf(b)).forEach((r) =>
@@ -396,6 +509,10 @@
     if (entry.addon) plain.push(entry.addon);
     if (entry.boss) plain.push(entry.boss);
     if (entry.isAsset) plain.push(`${entry.file.split(".").pop()} download`);
+
+    // Rule between the tags and the plain metadata, but only when there are
+    // tags to divide from.
+    if (bits.length) bits.push(`<span class="meta-rule" aria-hidden="true"></span>`);
     bits.push(`<span class="plain">${escapeHtml(plain.join(" \u00b7 "))}</span>`);
 
     if (entry.version)
@@ -600,7 +717,27 @@
     }
   });
 
+  el.discordBtn.addEventListener("click", async () => {
+    const done = await copyToClipboard(DISCORD_TAG);
+    el.discordStatus.textContent = done
+      ? "Copied to your clipboard."
+      : "Clipboard blocked \u2014 copy the tag by hand.";
+    openDiscordDialog();
+  });
+
+  el.discordClose.addEventListener("click", closeDiscordDialog);
+
+  // Clicking the blurred backdrop, but not the panel itself.
+  el.discordVeil.addEventListener("click", (e) => {
+    if (e.target === el.discordVeil) closeDiscordDialog();
+  });
+
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !el.discordVeil.hidden) {
+      closeDiscordDialog();
+      return;
+    }
+
     const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || "");
 
     if (!typing && e.key === "/") {
@@ -636,6 +773,53 @@
     readHash();
     render();
   });
+
+  /* ---------- discord dialog ---------- */
+
+  const DISCORD_TAG = "4ukai";
+  const DIALOG_LIFETIME = 10000;   // keep in step with the .modal-timer animation
+  const DIALOG_FADE = 300;        // keep in step with the .veil transition
+
+  let dialogCountdown = null;
+  let dialogTeardown = null;
+  let dialogOpener = null;
+
+  function openDiscordDialog() {
+    clearTimeout(dialogCountdown);
+    clearTimeout(dialogTeardown);
+
+    dialogOpener = document.activeElement;
+    el.discordVeil.hidden = false;
+
+    // Restart the countdown bar; without the reflow the animation only ever
+    // plays once, since the element never leaves the DOM.
+    if (el.discordTimer) {
+      el.discordTimer.style.animation = "none";
+      void el.discordTimer.offsetWidth;
+      el.discordTimer.style.animation = "";
+    }
+
+    void el.discordVeil.offsetWidth;
+    el.discordVeil.classList.add("is-open");
+    el.discordClose.focus();
+
+    dialogCountdown = setTimeout(closeDiscordDialog, DIALOG_LIFETIME);
+  }
+
+  function closeDiscordDialog() {
+    if (el.discordVeil.hidden) return;
+
+    clearTimeout(dialogCountdown);
+    clearTimeout(dialogTeardown);
+
+    el.discordVeil.classList.remove("is-open");
+    dialogTeardown = setTimeout(() => {
+      el.discordVeil.hidden = true;
+    }, DIALOG_FADE);
+
+    if (dialogOpener && dialogOpener.isConnected) dialogOpener.focus();
+    dialogOpener = null;
+  }
 
   /* ---------- clipboard, toasts, stars ---------- */
 
