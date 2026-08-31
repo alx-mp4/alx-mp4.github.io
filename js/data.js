@@ -63,14 +63,16 @@ const importsData = [
   {
     title: "Rocket Boots",
     category: "macros",
-    importText: `/equip Rocket Boots Xtreme
+    importText: `#showtooltip
+/equip Rocket Boots Xtreme
 /use 8
 /run C_Timer.After(0.2,function() EquipItemByName("NORMAL_BOOTS_NAME") end)`
   },
   {
     title: "Rocket Boots Nifty Cloak Skip",
     category: "macros",
-    importText: `/use Rocket Boots Xtreme
+    importText: `#showtooltip
+/use Rocket Boots Xtreme
 /use Nifty Stopwatch
 /use Gnomish Cloaking Device
 /equip Rocket Boots Xtreme
@@ -80,7 +82,8 @@ const importsData = [
   {
     title: "Engi Explosives",
     category: "macros",
-    importText: `/use Super Sapper Charge
+    importText: `#showtooltip
+/use Super Sapper Charge
 /use Goblin Sapper Charge
 /use [@cursor] Adamantite Grenade
 /use [@cursor] Fel Iron Bomb`
@@ -88,7 +91,8 @@ const importsData = [
   {
     title: "Healthstones / Nightmare Seed",
     category: "macros",
-    importText: `/use item:22105 
+    importText: `#showtooltip
+/use item:22105 
 /use item:22104 
 /use item:22103 
 /use Nightmare Seed`
@@ -96,7 +100,8 @@ const importsData = [
   {
     title: "Throw Shoot",
     category: "macros",
-    importText: `/cast [worn:thrown] Throw; Shoot`
+    importText: `#showtooltip
+/cast [worn:thrown] Throw; Shoot`
   },
   {
     title: "MO Skull Mark",
@@ -119,7 +124,8 @@ const importsData = [
     category: "macros",
     raid: "BT",
     boss: "Mother Shahraz",
-    importText: `/use Rocket Boots Xtreme
+    importText: `#showtooltip
+/use Rocket Boots Xtreme
 /use Major Shadow Protection Potion
 /use item:22105 
 /use item:22104 
@@ -130,7 +136,8 @@ const importsData = [
     category: "macros",
     raid: "SSC",
     boss: "Lady Vashj",
-    importText: `/use Tainted Core
+    importText: `#showtooltip
+/use Tainted Core
 /y <------- TAINTED CORE TO: %t ! ! !
 /s <------- TAINTED CORE TO: %t ! ! !
 /script SendChatMessage("!!! YOU HAVE THE CORE !!!", "WHISPER", nil, UnitName("target"));`
@@ -141,6 +148,7 @@ const importsData = [
     raid: "TK",
     boss: "Kael'thas",
     importText: `/run PlaySound(1213)
+#showtooltip
 /stopcasting
 /equipslot 16 Warp Slicer
 /equipslot 17 Infinity Blade`
@@ -152,6 +160,7 @@ const importsData = [
     class: "Warrior",
     roles: ["DPS", "Tank"],
     importText: `/run PlaySound(1213)
+#showtooltip
 /stopcasting
 /equipslot 17 SHIELD_NAME
 /equipslot 17 OFF_HAND_WEAPON_NAME`
@@ -170,7 +179,8 @@ const importsData = [
     category: "macros",
     class: "Warrior",
     roles: ["DPS"],
-    importText: `/cast Heroic Strike
+    importText: `#showtooltip
+/cast Heroic Strike
 /startattack
 /stopcasting`
   },
@@ -179,7 +189,8 @@ const importsData = [
     category: "macros",
     class: "Warrior",
     roles: ["DPS", "Tank"],
-    importText: `/cancelaura Blessing of Protection
+    importText: `#showtooltip Bloodthirst
+/cancelaura Blessing of Protection
 /startattack
 /cast Bloodthirst`
   },
@@ -341,7 +352,7 @@ const importsData = [
     category: "macros",
     class: "Hunter",
     roles: ["DPS"],
-    importText: `#showtooltip
+    importText: `#showtooltip Snake Trap
 /use Snake Trap
 /use Thornling Seed
 /use Dog Whistle`
