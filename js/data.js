@@ -219,7 +219,7 @@ const importsData = [
 /cast Victory Rush`
   },
   {
-    title: "Intervene ToT",
+    title: "ToT Intervene",
     category: "macros",
     class: "Warrior",
     roles: ["Tank", "DPS"],
@@ -228,7 +228,7 @@ const importsData = [
 /cast [@targettarget,help,nodead] Intervene`
   },
   {
-    title: "Intervene MO",
+    title: "MO Intervene",
     category: "macros",
     class: "Warrior",
     roles: ["Tank", "DPS"],
@@ -237,7 +237,7 @@ const importsData = [
 /cast [@mouseover] !Intervene`
   },
   {
-    title: "Overpower Mouseover",
+    title: "MO Overpower",
     category: "macros",
     class: "Warrior",
     roles: ["DPS"],
@@ -247,7 +247,7 @@ const importsData = [
 /cast [@mouseover,harm,nodead][] Overpower`
   },
   {
-    title: "Revenge Mouseover",
+    title: "MO Revenge",
     category: "macros",
     class: "Warrior",
     roles: ["Tank"],
