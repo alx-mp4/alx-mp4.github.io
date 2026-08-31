@@ -248,45 +248,57 @@ const importsData = [
   {
     title: "Turn Off Weather Density",
     category: "commands",
-    importText: `/console WeatherDensity 0`
+    importText: `/console WeatherDensity 0`,
+    note: `Default: 3`
   },
   {
     title: "Remove Screen Glow",
     category: "commands",
-    importText: `/console ffxGlow 0`
+    importText: `/console ffxGlow 0`,
+    note: `Default: 1`
   },
   {
-    title: "Remove Ghost Blue Haze Effect",
+    title: "Remove Ghost Blue Haze",
     category: "commands",
-    importText: `/console ffxDeath 0`
+    importText: `/console ffxDeath 0`,
+    note: `Default: 1`
   },
   {
-    title: "Enable Sharpening (Better Visibility)",
+    title: "Enable Sharpening",
     category: "commands",
-    importText: `/console set ResampleAlwaysSharpen 1`
+    importText: `/console set ResampleAlwaysSharpen 1`,
+    note: `Default: 0`
   },
   {
     title: "Hide Blizzard Nameplate Guilds",
     category: "commands",
-    importText: `/console UnitNamePlayerGuild 0`
+    importText: `/console UnitNamePlayerGuild 0`,
+    note: `Default: 1`
   },
   {
-    title: "Change Spellqueue (Default: 400)",
+    title: "Hide Blizzard Nameplate Titles",
     category: "commands",
-    importText: `/console SpellQueueWindow 250`
+    importText: `/console UnitNamePlayerPVPTitle 0`,
+    note: `Default: 1`
+  },
+  {
+    title: "Change Spellqueue Window Time",
+    category: "commands",
+    importText: `/console SpellQueueWindow 250`,
+    note: `Default: 400`
   },
 
   // ============================== ASSETS
   {
     title: "Chat Bubble Replacements",
     category: "assets",
-    description: "Various chat bubble styles.",
+    note: "Various chat bubble styles.",
     file: "assets/ChatBubbleReplacements.zip"
   },
   {
     title: "HD Icon Retextures",
     category: "assets",
-    description: "High-definition retextures for all icons until WOTLK included.",
+    note: "High-definition retextures for all icons until WOTLK included.",
     file: "assets/HDIconRetextures.zip"
   }
 ];

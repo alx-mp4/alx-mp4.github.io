@@ -91,6 +91,9 @@
       text,
       lines: text ? text.split("\n").length : 0,
       isAsset: Boolean(raw.file),
+      // `description` is the old name for this. Both feed one field so a card
+      // renders the same either way.
+      note: raw.note || raw.description || "",
       roles: raw.roles || [],
       raidName: raw.raid ? RAIDS[raw.raid] || raw.raid : "",
       parts: splitPlaceholders(raw.category, text)
@@ -114,9 +117,8 @@
       raw.addon,
       raw.version,
       raw.boss,
-      raw.note,
+      entry.note,
       raw.core ? "core" : "",
-      raw.description,
       labelFor(raw.category),
       text.length <= SEARCHABLE_BODY ? text : ""
     ]
@@ -411,12 +413,19 @@
     return card;
   }
 
+  // One extra line of context, sitting just above the buttons on every kind
+  // of card: the stock value for a console command, what a texture pack
+  // contains, whatever the entry needs said.
+  function appendNote(entry, body) {
+    if (!entry.note) return;
+    const note = element("p", "card-note");
+    note.textContent = entry.note;
+    body.appendChild(note);
+  }
+
   function buildAssetBody(entry, body) {
-    if (entry.description) {
-      const note = element("p", "asset-note");
-      note.textContent = entry.description;
-      body.appendChild(note);
-    }
+    appendNote(entry, body);
+
     const actions = element("div", "actions");
     const download = element("a", "btn btn-primary");
     download.href = entry.file;
@@ -466,7 +475,10 @@
       body.appendChild(note);
     }
 
-    const actions = element("div", "actions");    const copy = element("button", "btn btn-primary");
+    appendNote(entry, body);
+
+    const actions = element("div", "actions");
+    const copy = element("button", "btn btn-primary");
     copy.type = "button";
     copy.dataset.copy = entry.id;
     copy.textContent = "Copy";

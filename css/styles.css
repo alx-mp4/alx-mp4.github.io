@@ -795,15 +795,24 @@ body.is-searching .kbd-hint {
   color: var(--text);
 }
 
-.asset-note {
+/* The one extra line of context under a card's body. Monospaced, because
+   it is nearly always a value you compare against the code above it. */
+.card-note {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin: 0 0 0.2rem;
+  margin: 0.45rem 0 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+/* Assets have no code box above the note, so it needs its own breathing room. */
+.card[data-cat="assets"] .card-note {
+  margin-top: 0.1rem;
 }
 
 /* ---------- Empty state ---------- */
