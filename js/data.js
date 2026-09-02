@@ -336,8 +336,7 @@ const importsData = [
     category: "macros",
     class: "Hunter",
     roles: ["DPS"],
-    importText: `#showtooltip 
-/petattack
+    importText: `/petattack
 /petattack [target=mouseover]`
   },
   {
