@@ -6,9 +6,17 @@
 
 :root {
   --font-ui: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  /* Roboto everywhere, including the code boxes. The variable stays so the
-     "this is metadata / this is code" split is still visible in the rules. */
-  --font-mono: var(--font-ui);
+
+  /* Macros are code, so they are set in code. This also makes the `ch`
+     sizing on the fill-in inputs mean what it claims to mean: in a
+     proportional face `ch` is the width of a zero and predicts nothing. */
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* The one display face. Inscriptional Roman capitals — the register the
+     game itself is set in — and it appears in exactly three places: the
+     wordmark, the empty state, and the dialog title. Swap this line to
+     change the voice of the page; nothing else needs touching. */
+  --font-display: "Cinzel", "Palatino Linotype", Georgia, serif;
 
   --bg: #0e0f12;
   --bg-2: #15171b;
@@ -114,10 +122,12 @@ body::after {
   pointer-events: none;
 }
 
+/* Cinzel is drawn as capitals, so it wants tracking opened up rather than
+   pulled in — the negative letter-spacing that suited Roboto would jam it. */
 .display {
-  font-family: var(--font-ui);
+  font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.015em;
 }
 
 .mono,
@@ -168,10 +178,10 @@ pre,
   align-items: baseline;
   gap: 0.6rem;
   margin: 0;
-  font-size: clamp(1.9rem, 4.4vw, 2.9rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1;
+  font-size: clamp(1.8rem, 4.2vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
   color: var(--text);
 }
 
@@ -933,6 +943,24 @@ body.is-searching .kbd-hint {
   color: var(--muted);
 }
 
+/* The in-game macro body caps at 255 characters and silently truncates
+   past it, so the count is live rather than a surprise at paste time. */
+.len {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Only a separator when there is something to separate it from. */
+.len:not(:first-child)::before {
+  content: " \00b7 ";
+}
+
+.len.is-over {
+  color: var(--bad);
+  font-weight: 500;
+}
+
 .ph-note b {
   color: var(--accent);
   font-weight: 600;
@@ -1030,8 +1058,8 @@ body.is-searching .kbd-hint {
 
 .empty h2 {
   margin: 0 0 0.5rem;
-  font-size: 1.4rem;
-  font-weight: 400;
+  font-size: 1.35rem;
+  font-weight: 600;
   color: var(--text);
 }
 
@@ -1128,9 +1156,9 @@ body.is-searching .kbd-hint {
 
 .modal-title {
   margin: 0 0 0.5rem;
-  font-size: 1.3rem;
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .modal-note {

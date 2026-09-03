@@ -13,9 +13,11 @@
      version    addon version - plain text, never coloured
      note       one extra line of context on the card
 
-   No colours are written in this file. They are derived from the
-   field: class colours come from CLASS_COLOURS in app.js, role
-   colours from the stylesheet, everything else stays neutral.
+   No colours are written in this file. They are derived from the field
+   name: a `class` value is matched to the --class-* custom property of
+   the same name in css/styles.css, a `roles` value to --role-*, and
+   everything else stays neutral. app.js only maps the name to the
+   property; the values themselves live in the stylesheet.
    ------------------------------------------------------------------ */
 
 const importsData = [

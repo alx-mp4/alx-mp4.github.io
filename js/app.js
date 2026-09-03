@@ -12,17 +12,21 @@
      and renders as one wide column with no filters. */
   const CATEGORIES = [
     { id: "all", label: "All" },
-    { id: "addons", label: "Addons" },
-    { id: "weakauras", label: "WeakAuras" },
-    { id: "profiles", label: "Profiles" },
     { id: "macros", label: "Macros" },
     { id: "commands", label: "Commands" },
-    { id: "assets", label: "Assets" }
+    { id: "profiles", label: "Profiles" },
+    { id: "weakauras", label: "WeakAuras" },
+    { id: "assets", label: "Assets" },
+    { id: "addons", label: "Addons" }
   ];
 
+  // In-game macro bodies truncate past this, without warning.
+  const MACRO_LIMIT = 255;
+
   /* The class list is the single source of colour on this page. A class name
-     in data.js resolves to its CSS variable here; nothing else gets a colour.
-     Adding a class means adding one line here and one --class-* in styles.css. */
+     in data.js resolves through classVar() to the matching --class-* custom
+     property in styles.css; nothing else on the page gets a colour.
+     Adding a class means one line here and one --class-* in the stylesheet. */
   const CLASSES = [
     "Death Knight", "Druid", "Hunter", "Mage", "Paladin",
     "Priest", "Rogue", "Shaman", "Warlock", "Warrior"
@@ -267,8 +271,10 @@
 
     const tab = (cat) => {
       const n = countFor(cat.id, pool);
+      const on = state.category === cat.id;
       return `<button class="tab${n ? "" : " is-empty"}" type="button" role="tab"
-                aria-selected="${state.category === cat.id}" data-cat="${cat.id}">
+                id="tab-${cat.id}" aria-controls="grid" aria-selected="${on}"
+                tabindex="${on ? "0" : "-1"}" data-cat="${cat.id}">
                 ${cat.label}<span class="count">${n}</span>
               </button>`;
     };
@@ -361,6 +367,7 @@
     renderTabs();
     renderChips();
     renderResults(list);
+    el.grid.setAttribute("aria-labelledby", `tab-${state.category}`);
 
     el.empty.classList.toggle("hidden", list.length > 0);
     if (!state.query) {
@@ -382,7 +389,13 @@
 
     if (state.focusId) {
       const target = el.grid.querySelector(`[data-id="${CSS.escape(state.focusId)}"]`);
-      if (target) target.scrollIntoView({ block: "center" });
+      if (target) {
+        target.scrollIntoView({ block: "center" });
+        // Land the caret on the card too, so a link shared with someone on a
+        // keyboard or a screen reader arrives somewhere, not just visually.
+        target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
       state.focusId = "";
     }
   }
@@ -396,6 +409,7 @@
     el.grid.classList.add("is-wide");
 
     renderTabs();
+    el.grid.setAttribute("aria-labelledby", "tab-addons");
 
     el.results.innerHTML = `<span><b>${list.length}</b> ${
       list.length === 1 ? "addon" : "addons"
@@ -582,13 +596,23 @@
     wrap.appendChild(pre);
     body.appendChild(wrap);
 
-    if (entry.hasPlaceholders) {
+    /* A macro is measured whether or not it has anything to fill in — a
+       fixed one can sit over the limit just as easily. */
+    let counter = null;
+
+    if (entry.hasPlaceholders || entry.category === "macros") {
       const note = element("p", "ph-note");
-      const n = inputs.length;
-      note.innerHTML =
-        n === 1
-          ? `Fill in <b>1</b> name above &mdash; it goes into the copy.`
-          : `Fill in <b>${n}</b> names above &mdash; they go into the copy.`;
+
+      if (entry.hasPlaceholders) {
+        const n = inputs.length;
+        note.innerHTML =
+          n === 1
+            ? `Fill in <b>1</b> name above &mdash; it goes into the copy.`
+            : `Fill in <b>${n}</b> names above &mdash; they go into the copy.`;
+      }
+
+      counter = element("span", "len");
+      note.appendChild(counter);
       body.appendChild(note);
     }
 
@@ -603,14 +627,52 @@
 
     body.appendChild(actions);
 
+    const refreshCounter = () => {
+      if (!counter) return;
+      const n = resolve(entry, body).length;
+      const over = entry.category === "macros" && n > MACRO_LIMIT;
+      counter.textContent = over
+        ? `${n} of ${MACRO_LIMIT} characters \u2014 too long, the game will cut it off`
+        : `${n} characters`;
+      counter.classList.toggle("is-over", over);
+    };
+
     // Live wiring for placeholder edits
     inputs.forEach((input) => {
       input.addEventListener("input", () => {
-        fills[input.dataset.token] = input.value;
-        store.set("4ukai:fills", fills);
+        setFill(input.dataset.token, input.value, input);
         sizeInput(input);
+        refreshCounter();
       });
     });
+
+    // A sibling card editing a shared token bubbles up to here.
+    body.addEventListener("fill:sync", refreshCounter);
+
+    refreshCounter();
+  }
+
+  /* One token can appear on several cards. Write it once, push it to every
+     input that shares the name, and re-measure the cards it touched — the
+     clipboard already resolved from the shared store, so before this the
+     page could show one value and copy another. */
+  function setFill(token, value, source) {
+    fills[token] = value;
+    saveFills();
+
+    document.querySelectorAll(`.ph[data-token="${CSS.escape(token)}"]`).forEach((input) => {
+      if (input === source || input.value === value) return;
+      input.value = value;
+      sizeInput(input);
+      input.dispatchEvent(new CustomEvent("fill:sync", { bubbles: true }));
+    });
+  }
+
+  /* Typing is per-keystroke; serialising the whole map that often is not. */
+  let fillTimer = null;
+  function saveFills() {
+    clearTimeout(fillTimer);
+    fillTimer = setTimeout(() => store.set("4ukai:fills", fills), 180);
   }
 
   function sizeInput(input) {
@@ -652,6 +714,28 @@
     syncHash();
   });
 
+  /* A tablist is expected to move under the arrow keys, with Tab reserved
+     for leaving the group. Only one tab is ever in the tab order. */
+  el.tabs.addEventListener("keydown", (e) => {
+    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    if (!step && e.key !== "Home" && e.key !== "End") return;
+
+    const tabs = [...el.tabs.querySelectorAll("[data-cat]")];
+    if (!tabs.length) return;
+
+    const at = tabs.findIndex((t) => t.dataset.cat === state.category);
+    const next =
+      e.key === "Home" ? 0
+      : e.key === "End" ? tabs.length - 1
+      : (at + step + tabs.length) % tabs.length;
+
+    e.preventDefault();
+    state.category = tabs[next].dataset.cat;
+    render();
+    syncHash();
+    el.tabs.querySelector(`[data-cat="${CSS.escape(state.category)}"]`)?.focus();
+  });
+
   el.chips.addEventListener("click", (e) => {
     const chip = e.target.closest("button");
     if (!chip) return;
@@ -691,7 +775,13 @@
       const done = await copyToClipboard(text);
       if (done) {
         flashButton(copyBtn);
-        toast(`${entry.title} copied`, `${text.length} characters`);
+        const over = entry.category === "macros" && text.length > MACRO_LIMIT;
+        toast(
+          `${entry.title} copied`,
+          over
+            ? `${text.length} characters \u2014 over the ${MACRO_LIMIT} limit, the game will cut it off`
+            : `${text.length} characters`
+        );
       } else {
         toast("Couldn't reach the clipboard", "Select the text and copy it manually.");
       }
@@ -835,6 +925,9 @@
         helper.style.cssText = "position:fixed;top:0;left:-9999px;opacity:0";
         document.body.appendChild(helper);
         helper.select();
+        // Safari on iOS ignores select() on a readonly field; this is the
+        // only thing it listens to.
+        helper.setSelectionRange(0, text.length);
         const ok = document.execCommand("copy");
         helper.remove();
         return ok;
@@ -955,7 +1048,13 @@
       if (m) colour = `${parseInt(m[1], 16)}, ${parseInt(m[2], 16)}, ${parseInt(m[3], 16)}`;
     }
 
+    let running = false;
+
     function frame() {
+      if (document.hidden) {
+        running = false;
+        return;
+      }
       ctx.clearRect(0, 0, w, h);
       dust.forEach((d) => {
         d.y -= d.speed;
@@ -973,10 +1072,20 @@
       requestAnimationFrame(frame);
     }
 
+    /* Browsers throttle a hidden tab but never stop it, and this page will
+       sit behind the game for hours. Drop the loop entirely instead. */
+    function start() {
+      if (running || document.hidden) return;
+      running = true;
+      requestAnimationFrame(frame);
+    }
+
     resize();
     seed();
     recolour();
-    requestAnimationFrame(frame);
+    start();
+
+    document.addEventListener("visibilitychange", start);
     window.addEventListener("resize", () => {
       resize();
       seed();
@@ -1006,15 +1115,24 @@
     return escapeHtml(value);
   }
 
+  /* Split on the raw text and escape each piece, rather than escaping first
+     and then running the regex over the result. The old order let a search
+     for "amp" or "quot" match inside an entity it had just created and
+     break the markup apart. */
   function highlight(text, tokens) {
-    const safe = escapeHtml(text);
-    if (!tokens.length) return safe;
+    const value = String(text);
+    if (!tokens.length) return escapeHtml(value);
+
     const pattern = tokens
       .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
       .filter(Boolean)
       .join("|");
-    if (!pattern) return safe;
-    return safe.replace(new RegExp(`(${pattern})`, "gi"), "<mark>$1</mark>");
+    if (!pattern) return escapeHtml(value);
+
+    return value
+      .split(new RegExp(`(${pattern})`, "gi"))
+      .map((piece, i) => (i % 2 ? `<mark>${escapeHtml(piece)}</mark>` : escapeHtml(piece)))
+      .join("");
   }
 
   /* ---------- boot ---------- */
